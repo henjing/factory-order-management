@@ -9,18 +9,13 @@ import { Menu, Breadcrumb, Icon } from 'antd';
 import { routeBase } from '../../appConstants/urlConfig';
 const SubMenu = Menu.SubMenu;
 
-// 匹配目录管理
-const menuList = ['sub1', 'sub2'];
-const sub1List = ['people', 'product', 'enroll', 'printer'];
-const sub2List = ['order_overview', 'goods_supplement'];
-
 const SidebarLayoutContainer = React.createClass({
 
       onCollapseChange() {
           store.dispatch(collapseFunc());
       },
 
-    render : function () {
+    render() {
         const collapse = this.props.collapse;
         const sidebarWrapperName = collapse ? 'sidebarWrapperCollapse' : 'sidebarWrapper';
         const mode = collapse ? 'vertical' : 'inline';
@@ -35,24 +30,10 @@ const SidebarLayoutContainer = React.createClass({
 
                     <Menu mode={mode}
                       defaultSelectedKeys={[pathName]} defaultOpenKeys={['sub1']}>
-                      <SubMenu key="sub1" title={<span><Icon type="user" /><span className={styles.navText}>精准扶贫管理</span></span>}>
-                        <Menu.Item key={routeBase + 'people'}>
-                            <Link to={routeBase + 'people'}>
-                                贫困户列表</Link>
-                        </Menu.Item>
-                        <Menu.Item key={routeBase + 'product'}>
-                            <Link to={routeBase + 'product'} >
-                                农产品列表
-                            </Link>
-                        </Menu.Item>
-                        <Menu.Item key={routeBase + 'enroll'}>
-                            <Link to={routeBase + 'enroll'} >
-                                产品入库
-                            </Link>
-                        </Menu.Item>
-                        <Menu.Item key={routeBase + 'printer'}>
-                            <Link to={routeBase + 'printer'} >
-                                打印机信息
+                      <SubMenu key="sub1" title={<span><Icon type="home" /><span className={styles.navText}>厂商管理后台</span></span>}>
+                        <Menu.Item key={routeBase + 'order_list'}>
+                            <Link to={routeBase + 'order_list'}>
+                                我收到的订单
                             </Link>
                         </Menu.Item>
                       </SubMenu>

@@ -27,7 +27,7 @@ module.exports = {
 	],
 	output: {
 		// path: path.join(__dirname, 'public'),
-		path: path.join(__dirname, '../../Documents/root/public/village'),
+		path: path.join(__dirname, '../../Documents/厂商后台/root'),
 		// filename: '[chunkhash].js'
 		filename: 'bundle.js'
 	},

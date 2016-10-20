@@ -2,10 +2,8 @@ import React from 'react';
 import { Input, Button } from 'antd';
 import classNames from 'classnames';
 const InputGroup = Input.Group;
-import { getPeople } from '../../api/people-api';
 import { connect } from 'react-redux';
 import store from '../../store';
-import { updatePeopleSearch } from '../../actions/people-actions';
 
 const SearchInput = React.createClass({
   getInitialState() {
@@ -37,7 +35,7 @@ const SearchInput = React.createClass({
       'ant-search-input-focus': this.state.focus,
     });
     return (
-      <div className="ant-search-input-wrapper" style={style}>
+      <div className="ant-search-input-wrapper lineHeight" style={style}>
         <InputGroup className={searchCls}>
           <Input placeholder={placeholder} value={value} onChange={this.handleInputChange}
             onFocus={this.handleFocusBlur} onBlur={this.handleFocusBlur} onPressEnter={this.handleSearch}
@@ -53,7 +51,7 @@ const SearchInput = React.createClass({
 
 function mapStateToProps(store) {
     return {
-        value : store.peopleSearchState.search
+        value : ''
     }
 }
 

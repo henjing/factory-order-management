@@ -3,8 +3,6 @@ import React from 'react';
 const RangePicker = DatePicker.RangePicker;
 import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
-import { getPeople } from '../../api/people-api';
-import { updatePeopleSearch, resetPeopleSearch} from '../../actions/people-actions';
 
 const datePicker = React.createClass({
 
@@ -38,6 +36,9 @@ const datePicker = React.createClass({
                 <Col className="lineHeight" style={{minWidth : 640}}>
                     <span className="spanWidth">日期:</span>
                     <RangePicker style={{ width: 284, marginLeft: 8 }} onChange={this.onChange} />
+                </Col>
+                <Col className="lineHeight" style={{minWidth : 640}}>
+                    <span className="spanWidth">筛选:</span>
                     <Button type={typeState == 'today' ? 'primary' : ''} onClick={this.handleClick('today')} style={style}>今日</Button>
                     <Button type={typeState == 'week' ? 'primary' : ''} onClick={this.handleClick('week')} style={style}>本周</Button>
                     <Button type={typeState == 'month' ? 'primary' : ''} onClick={this.handleClick('month')} style={style}>本月</Button>
@@ -50,7 +51,7 @@ const datePicker = React.createClass({
 
 function mapStateToProps(store) {
     return {
-        searchState : store.peopleSearchState
+        searchState : { timeLimit : ''}
     }
 }
 

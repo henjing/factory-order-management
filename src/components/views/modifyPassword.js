@@ -5,7 +5,7 @@ const FormItem = Form.Item;
 import React from 'react';
 import './modifyPassword.css'
 import { connect } from 'react-redux';
-import { hidePasswordModal } from '../../actions/user-actions';
+import { passwordModalToggle } from '../../actions/admin-actions';
 import { modifyPassword } from '../../api/password-api';
 
 function noop() {
@@ -118,7 +118,7 @@ let Demo = React.createClass({
   },
 
     onHide() {
-        this.props.dispatch(hidePasswordModal());
+        this.props.dispatch(passwordModalToggle());
         this.setState({...this.getInitialState()});
         this.props.form.resetFields();
     },

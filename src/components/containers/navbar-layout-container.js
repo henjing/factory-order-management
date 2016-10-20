@@ -1,28 +1,21 @@
 import React from 'react';
 import styles from './navbar-layout-container.less';
 import { connect } from 'react-redux';
-import * as userApi from '../../api/user-api';
-import { getVillage } from '../../api/people-api';
-import { getProductList } from '../../api/product-api';
-import { getPrinterList } from '../../api/printer-api';
-import { Menu, Dropdown, Icon, Button } from 'antd';
+import { getAdmin } from '../../api/admin-api';
+import { Menu, Dropdown, Icon } from 'antd';
 import ModifyPassword from '../views/modifyPassword';
-import { showPasswordModal } from '../../actions/user-actions';
+import { passwordModalToggle } from '../../actions/admin-actions';
 import store from '../../store';
 import { logoutUrl, defaultAvatar } from '../../appConstants/urlConfig';
 
 const NavbarLayoutContainer = React.createClass({
     
     componentDidMount : function () {
-        userApi.getUser();
-        getVillage();
-        getProductList();
-        
-        getPrinterList();
+        getAdmin({});
     },
 
     handleClick() {
-        store.dispatch(showPasswordModal());
+        store.dispatch(passwordModalToggle());
     },
 
     render : function () {
@@ -37,6 +30,7 @@ const NavbarLayoutContainer = React.createClass({
             </Menu.Item>
           </Menu>
         );
+        const admin = this.props.admin;
         return (
             <nav className="navbar navbar-default navbar-fixed">
                 <div className="container-fluid">
@@ -46,9 +40,9 @@ const NavbarLayoutContainer = React.createClass({
                             <div className="navbar-lists">
                                 <ul className="nav navbar-nav navbar-right">
                                     <li className={styles.navLi}>
-                                        <img src={this.props.user.wechat_avatar ? this.props.user.wechat_avatar : defaultAvatar} alt="avatar"/>
+                                        <img src={admin.wechat_avatar ? admin.wechat_avatar : defaultAvatar} alt="avatar"/>
                                         &nbsp;
-                                        <span>{this.props.user.user_name}</span>
+                                        <span>{admin.user_name}</span>
                                     </li>
                                     <li className={styles.navLi + ' ' + styles.setup}>
                                         <Dropdown overlay={menu}>
@@ -69,7 +63,7 @@ const NavbarLayoutContainer = React.createClass({
 
 const mapStateToProps = function (store) {
     return {
-        user : store.navbarLayoutState
+        admin : store.adminState.info
     }
 };
 
