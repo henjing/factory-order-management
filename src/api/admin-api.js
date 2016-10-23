@@ -5,7 +5,7 @@ import store from '../store';
 
 // get user auth and profile
 export function getAdmin(config, sucCallback, failCallback) {
-    return commonGetAjax(getAdminUrl, config, function (info) {
+    return commonAjax(getAdminUrl, config, function (info) {
         store.dispatch(getAdminSuccess(info));
         if (sucCallback) sucCallback();
     }, failCallback);

@@ -3,7 +3,7 @@ import * as types from '../actions/action-types';
 const initialState = {
     currentPage : 1,
     info : [],
-    status : 0,
+    status : 1,
     totalPage : 1,
     totalRows : 0
 };
@@ -14,6 +14,9 @@ const orderListReducer = function orderListReducer(state = initialState, action)
     switch (action.type) {
         
         case types.GET_ORDER_LIST_SUCCESS :
+            return Object.assign({}, state, {...action.info});
+
+        case types.RESET_GET_ORDER_LIST :
             return Object.assign({}, state, {...action.info});
     }
     

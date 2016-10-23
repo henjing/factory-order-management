@@ -19,4 +19,11 @@ export const getOrderListUrl = '/Api/index.php/Index/getStoreSupplementList';
 // 获取当前登录用户的信息
 export const getAdminUrl = '/Api/index.php/Index/getUserInfo';
 
+// 获取物流单号详情
+export const expressDetailUrl = '/Api/index.php/Index/showExpressDetail';
 
+// 厂家发货操作
+export const factorySendUrl = '/Api/index.php/Index/factorySend';
+
+// 获取快递公司列表
+export const expressListUrl = '/Api/index.php/Index/getExpressList';

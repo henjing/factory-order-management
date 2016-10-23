@@ -92,3 +92,12 @@ Please contribute to the project if you think this can be done better in anyway 
 开发时的修改
 1. vi /etc/hosts
 2. 按下"A"进入编辑模式,增加host数据后,按下ESC,输入':wq!'退出vim.
+
+改进建议:
+1. app.less 使用css-modules, app.css使用全局css,只需要这两个css文件
+2. 将有关store, dispatch, api 的操作都放在helpers文件夹中
+3. 用webpack设置一个全局对象,包含 React, store, types等等, 因为在每个jsx文件内重复import一些变量真的很烦!
+4. views/ 内的组件不和containers/ 交互,而是和helpers/
+5. 加上Spin, 登录页
+6. 用bootsrap.css美化
+7. 加上mock.js 节省时间

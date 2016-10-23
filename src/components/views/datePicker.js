@@ -7,25 +7,24 @@ import { connect } from 'react-redux';
 const datePicker = React.createClass({
 
     onChange(dates, dateStrings) {
-      // console.log('From: ', dates[0], ', to: ', dates[1]);
-      // console.log('From: ', dateStrings[0], ', to: ', dateStrings[1]);
-        this.props.dispatch(updatePeopleSearch({ dateStart : dateStrings[0], dateEnd : dateStrings[1]}));
-        getPeople();
+        this.props.updateSearch('dateStart')(dateStrings[0]);
+        this.props.updateSearch('dateEnd')(dateStrings[1]);
+        this.props.updateSearch('commit')();
     },
 
     handleClick(timeLimit) {
-        return () => {
-            this.props.dispatch(updatePeopleSearch({ timeLimit : timeLimit}));
-            getPeople();
-        }
+        return (() => {
+            this.props.updateSearch('timeLimit')(timeLimit);
+            this.props.updateSearch('commit')();
+        }).bind(this);
     },
 
     handleReset() {
         try {
             document.getElementsByClassName('ant-calendar-picker-clear')[0].click();
         } catch (e) {}
-        this.props.dispatch(resetPeopleSearch());
-        getPeople();
+        this.props.updateSearch('reset')();
+        this.props.updateSearch('commit')();
     },
 
     render : function () {
@@ -51,10 +50,8 @@ const datePicker = React.createClass({
 
 function mapStateToProps(store) {
     return {
-        searchState : { timeLimit : ''}
+        searchState : store.orderListSearchState
     }
 }
 
 export default connect(mapStateToProps)(datePicker);
-  
-

@@ -3,7 +3,6 @@ import { Input, Button } from 'antd';
 import classNames from 'classnames';
 const InputGroup = Input.Group;
 import { connect } from 'react-redux';
-import store from '../../store';
 
 const SearchInput = React.createClass({
   getInitialState() {
@@ -17,13 +16,11 @@ const SearchInput = React.createClass({
       focus: e.target === document.activeElement,
     });
   },
-  handleSearch() {
-      getPeople();
-  },
+
   handleInputChange(e) {
-      console.log('value', e);
-      store.dispatch(updatePeopleSearch({ search : e.target.value}));
+      this.props.updateSearch('search')(e.target.value);
   },
+
   render() {
     const { style, placeholder, value } = this.props;
     const btnCls = classNames({
@@ -38,10 +35,10 @@ const SearchInput = React.createClass({
       <div className="ant-search-input-wrapper lineHeight" style={style}>
         <InputGroup className={searchCls}>
           <Input placeholder={placeholder} value={value} onChange={this.handleInputChange}
-            onFocus={this.handleFocusBlur} onBlur={this.handleFocusBlur} onPressEnter={this.handleSearch}
+            onFocus={this.handleFocusBlur} onBlur={this.handleFocusBlur} onPressEnter={this.props.updateSearch('commit')}
           />
           <div className="ant-input-group-wrap">
-            <Button icon="search" className={btnCls} onClick={this.handleSearch} />
+            <Button icon="search" className={btnCls} onClick={this.props.updateSearch('commit')} />
           </div>
         </InputGroup>
       </div>
@@ -51,7 +48,7 @@ const SearchInput = React.createClass({
 
 function mapStateToProps(store) {
     return {
-        value : ''
+        value : store.orderListSearchState.search
     }
 }
 

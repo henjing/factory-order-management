@@ -38,7 +38,7 @@ function errHandler(err) {
 }
 
 function formData(config) {
-    // console.log('11111111111', config);
+    console.log('11111111111', config);
     let formData = new FormData();
     
     for (let i in config) {
