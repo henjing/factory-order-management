@@ -17,7 +17,7 @@ const orderListReducer = function orderListReducer(state = initialState, action)
             return Object.assign({}, state, {...action.info});
 
         case types.RESET_GET_ORDER_LIST :
-            return Object.assign({}, state, {...action.info});
+            return Object.assign({}, {...initialState});
     }
     
     return state;

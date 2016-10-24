@@ -22,3 +22,13 @@ export const GET_EXPRESS_INFO = 'GET_EXPRESS_INFO';
 export const EXPRESS_INFO_MODAL_TOGGLE = 'EXPRESS_INFO_MODAL_TOGGLE';
 // 重置 order-list-reducer
 export const RESET_GET_ORDER_LIST = 'RESET_GET_ORDER_LIST';
+// 更新订单统计的reducer
+export const UPDATE_ORDER_STAT = 'UPDATE_ORDER_STAT';
+// 更新订单统计的种类reducer
+export const UPDATE_GOODS_CATEGORY = 'UPDATE_GOODS_CATEGORY';
+// 订单统计的搜索条件
+export const UPDATE_ORDER_STAT_SEARCH = 'UPDATE_ORDER_STAT_SEARCH';
+// 重置订单统计的搜索条件
+export const RESET_ORDER_STAT_SEARCH = 'RESET_ORDER_STAT_SEARCH';
+// 重置 order stat
+export const RESET_ORDER_STAT = 'RESET_ORDER_STAT';

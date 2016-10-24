@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './navbar-layout-container.less';
+import styles from '../../app.less';
 import { connect } from 'react-redux';
 import { getAdmin } from '../../api/admin-api';
 import { Menu, Dropdown, Icon } from 'antd';

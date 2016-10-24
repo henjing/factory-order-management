@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Checkbox, Icon, Button } from 'antd';
+import { Row, Col, Checkbox, Icon, Button, message } from 'antd';
 import store from '../../store';
 import { getExpressInfoSuccess, expressInfoModalToggle, sendModalDataSource, sendModalToggle } from '../../actions/order-list-actions';
 import { getExpressInfo } from '../../api/order-list-api';
@@ -17,8 +17,12 @@ const OrderListTableRow = React.createClass({
 
     sendModalClick(dataSource) {
         return function () {
+            if (this.props.isSameAddress()) {
+                store.dispatch(sendModalToggle());
+            } else {
+                message.error('收货地址不一致,无法合并发货!');
+            }
 
-            store.dispatch(sendModalToggle());
         }.bind(this);
     },
 
@@ -33,9 +37,10 @@ const OrderListTableRow = React.createClass({
             let express_sn = dataSource.express_sn;
             store.dispatch(getExpressInfoSuccess({...dataSource}));
             getExpressInfo({express_sn : express_sn}, function () {
-                // store.dispatch(expressInfoModalToggle());
+                store.dispatch(expressInfoModalToggle());
+            }, function (info) {
+                message.error(info.info);
             });
-            store.dispatch(expressInfoModalToggle());
         }.bind(this);
     },
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Select, Modal, Row, Col, Icon, Input } from 'antd';
+import { Form, Select, Modal, Row, Col, Icon, Input, message } from 'antd';
 import { connect } from 'react-redux';
 const FormItem = Form.Item;
 const createForm = Form.create;
@@ -7,7 +7,7 @@ const Option = Select.Option;
 import ModalTableRow from './modalTableRow';
 import store from '../../store';
 import { sendModalDataSource} from '../../actions/order-list-actions';
-import { factorySend } from '../../api/order-list-api';
+import { factorySend, getOrderList } from '../../api/order-list-api';
 
 let SendModal = React.createClass({
 
@@ -22,7 +22,13 @@ let SendModal = React.createClass({
                 let finalConfig = Object.assign({}, {...values});
                 // console.log('原装的finalConfig', finalConfig);
                 store.dispatch(sendModalDataSource({...finalConfig}));
-                factorySend(store.getState().factorySendState);
+                factorySend(store.getState().factorySendState, function () {
+                    message.success('发货成功');
+                    getOrderList({...store.getState().orderListSearchState});
+                    this.hideModal();
+                }.bind(this), function (info) {
+                    message.error('发货失败!' + info.info);
+                }.bind(this));
             }
         });
     },
@@ -32,9 +38,21 @@ let SendModal = React.createClass({
         this.props.form.resetFields();
     },
 
+    express_sn(rule, value, callback) {
+        try {
+            if (value.length > 5) {
+                callback();
+            } else {
+                callback(['单号必须6位以上']);
+            }
+        } catch (e) {
+            callback(['填写有误']);
+        }
+    },
+
     render() {
         let { visible, info } = this.props.factorySendState;
-        visible = process.env.NODE_ENV !== 'production' ? true : visible;
+        // visible = process.env.NODE_ENV !== 'production' ? true : visible;
         const infoSingle = info[0];
         const rowStyle = { height : '40px', lineHeight : '40px', background : '#f6f9fb', marginLeft : '-15px', marginRight : '-15px', marginBottom : '8px', marginTop : '8px'};
         const colStyle = { textAlign : 'center'};
@@ -78,9 +96,9 @@ let SendModal = React.createClass({
                     {addressCol}
                 </Row>
                 <Row style={rowStyle}>
-                    <Col style={colStyle} span={10}>产品名称</Col>
-                    <Col style={colStyle} span={7}>单价</Col>
-                    <Col style={colStyle} span={7}>数量</Col>
+                    <Col style={colStyle} span={14}>产品名称</Col>
+                    <Col style={colStyle} span={5}>单价</Col>
+                    <Col style={colStyle} span={5}>数量</Col>
                 </Row>
                 <Row>
                     <Col>
@@ -112,7 +130,7 @@ let SendModal = React.createClass({
                                 {...formItemLayout} style={{width : '360px'}}
                                 hasFeedback label="快递单号">
                                 {getFieldDecorator('express_sn', {
-                                    rules : [{ required : true, message : '请输入快递单号' }]
+                                    rules : [{ required : true, whitespace : true, message : '请输入快递单号' }, {validator : this.express_sn}]
                                 })(
                                     <Input style={{width : '268px'}}/>
                                 )}
@@ -121,7 +139,7 @@ let SendModal = React.createClass({
                                 {...formItemLayout} style={{width : '360px'}}
                                 hasFeedback label="运费(元)">
                                 {getFieldDecorator('express_fee', {
-                                    rules : [{ required : true, message : '填写快递运费' }]
+                                    rules : [{ required : true, whitespace : true, message : '填写快递运费' }]
                                 })(
                                     <Input style={{width : '268px'}} type="number"/>
                                 )}

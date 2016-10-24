@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styles from './order-list-container.less';
+import styles from '../../app.less';
 import { Row, Col, Pagination } from 'antd';
 import SearchInput from '../views/searchInput';
 import DatePicker from '../views/datePicker';
@@ -51,18 +51,6 @@ const OrderListContainer = React.createClass({
     commitSearch() {
         getOrderList({...store.getState().orderListSearchState})
     },
-    
-    checkboxClick(key) {
-        if (key == 'single') {
-            return function () {
-                
-            }.bind(this);
-        } else if (key == 'all') {
-            return function () {
-                
-            }.bind(this);
-        }
-    },
 
     closeModal() {
         store.dispatch(sendModalToggle());
@@ -100,7 +88,7 @@ const OrderListContainer = React.createClass({
 
                 <FilterPanel updateSearch={this.updateSearch} />
                 
-                <OrderListTable status={orderList.status} dataSourceList={orderList.info} total={orderList.totalRows} currentPage={orderList.currentPage} updateSearch={this.updateSearch} checkboxClick={this.checkboxClick} modalClick={this.modalClick} />
+                <OrderListTable status={orderList.status} dataSourceList={orderList.info} total={orderList.totalRows} currentPage={orderList.currentPage} updateSearch={this.updateSearch}  modalClick={this.modalClick} />
                 
                 <FactorySendModal closeModal={this.closeModal} />
 

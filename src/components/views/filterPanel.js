@@ -3,6 +3,7 @@ import { Row, Col, Button, Icon, Badge } from 'antd';
 import { connect } from 'react-redux';
 import store from '../../store';
 import { sendModalDataSource, resetOrderListSearch } from '../../actions/order-list-actions';
+import { getOrderListFileUrl } from '../../appConstants/urlConfig';
 
 const FilterPanel = React.createClass({
     
@@ -38,7 +39,24 @@ const FilterPanel = React.createClass({
     
     render() {
         const { status } = this.props.searchState;
+        const {  downloadStatus, searchState } = this.props;
         const count = status == '0' ? {count : this.props.total} : {};
+
+        let inputGroup = [];
+        let finalInputGroup = '';
+        let disabled = true;
+        for (let i in searchState) {
+            if (searchState[i]) {
+                inputGroup.push(
+                    <input type="hidden" name={i} value={searchState[i]} />
+                )
+            }
+        }
+        if (downloadStatus != 0) {
+            finalInputGroup = inputGroup;
+            disabled = false;
+        };
+
         return (
             <Row type="flex" align="middle" style={{ marginLeft : 88, height : 100 }}>
                 <Col span={16} >
@@ -52,7 +70,11 @@ const FilterPanel = React.createClass({
                 <Col span={4}>
                     <Row type="flex" align="middle" justify="center">
                         <Col>
-                            <Button icon="download">导出列表</Button>
+                            <form action={getOrderListFileUrl} style={{display : 'inline-block'}}>
+                                {finalInputGroup}
+                                <Button disabled={disabled} htmlType="submit" icon="download">导出列表</Button>
+                            </form>
+
                         </Col>
                     </Row>
                 </Col>
@@ -64,7 +86,8 @@ const FilterPanel = React.createClass({
 const mapStateToProps = function (store) {
     return {
         searchState : store.orderListSearchState,
-        total : store.orderListState.totalRows
+        total : store.orderListState.totalRows,
+        downloadStatus : store.orderListState.info.length
     }
 };
 

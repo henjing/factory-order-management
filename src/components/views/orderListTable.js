@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Checkbox, Button, Icon, Pagination } from 'antd';
+import { Row, Col, Checkbox, Button, Icon, Pagination, message } from 'antd';
 import TableRow from './orderListTableRow';
 import { connect } from 'react-redux';
 import store from '../../store';
@@ -14,8 +14,25 @@ const OrderListTable = React.createClass({
 
     buttonClick() {
         if (this.props.sendState.info.length > 0) {
-            store.dispatch(sendModalToggle());
+            if (this.isSameAddress()) {
+                store.dispatch(sendModalToggle());
+            } else {
+                message.error('收货地址不一致,无法合并发货!');
+            }
         }
+    },
+
+    isSameAddress() {
+        const addressList = this.props.sendState.info.map(function (option) {
+            return option.address;
+        });
+        var temp = function () {
+            for (let i = 1; i < addressList.length; i++) {
+                if (addressList[i] !== addressList[0]) return false;
+            }
+            return true;
+        };
+        return temp();
     },
     
     onChange(e) {
@@ -42,6 +59,7 @@ const OrderListTable = React.createClass({
                 tableRowList.push(
                     <TableRow
                         key={dataSourceList[i]['record_sn']}
+                        isSameAddress={this.isSameAddress}
                         modalClick={this.props.modalClick}
                         dataSource={dataSourceList[i]}  />
                 )

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import store from '../../store';
-import styles from './sidebar-layout-container.less';
+import styles from '../../app.less';
 import { Link } from 'react-router';
 import { collapseFunc } from '../../api/collapse-api';
 import imgSrc from '../../appConstants/assets/images/logo_white.png';
@@ -34,6 +34,11 @@ const SidebarLayoutContainer = React.createClass({
                         <Menu.Item key={routeBase + 'order_list'}>
                             <Link to={routeBase + 'order_list'}>
                                 我收到的订单
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key={routeBase + 'order_stat'}>
+                            <Link to={routeBase + 'order_stat'}>
+                                已发货的订单
                             </Link>
                         </Menu.Item>
                       </SubMenu>

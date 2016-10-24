@@ -27,3 +27,18 @@ export const factorySendUrl = '/Api/index.php/Index/factorySend';
 
 // 获取快递公司列表
 export const expressListUrl = '/Api/index.php/Index/getExpressList';
+
+// 获取已发货订单列表
+export const getExpressedOrderUrl = '/Api/index.php/Index/getExpressedSupplementList';
+
+// 获取该厂商销售的商品种类列表
+export const getGoodsCategoryUrl = '/Api/index.php/Index/getGoodsList';
+
+// 导出已发货订单列表
+export const getExpressedOrderFileUrl = '/Api/index.php/Index/makeOutExpressSupplementList';
+
+// 导出订单列表
+export const getOrderListFileUrl = '/Api/index.php/Index/makeOutSupplementList';
+
+// 下载页
+export const downloadUrl = '/Api/index.php/Index/download';

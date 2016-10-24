@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
 import orderListContainer from './components/containers/order-list-container';
+import orderStatContainer from './components/containers/order-stat-container';
 
 // Layouts
 import MainLayout from './components/layouts/main-layout';
@@ -14,6 +15,8 @@ export default (
 
             <IndexRedirect to={routeBase + 'order_list'} />
             <Route path={routeBase + 'order_list'} component={orderListContainer}></Route>
+            
+            <Route path={routeBase + 'order_stat'} component={orderStatContainer}></Route>
             
         </Route>
     </Router>

@@ -9,6 +9,8 @@ import orderListSearchReducer from './order-list-search-reducer';
 import factorySendReducer from './factory-send-reducer';
 import expressListReducer from './express-list-reducer';
 import expressInfoReducer from './express-info-reducer';
+import orderStatReducer from './order-stat-reducer';
+import orderStatSearchReducer from './order-stat-search-reducer';
 
 const reducers = combineReducers({
     collapseState : collapseReducer,
@@ -18,7 +20,9 @@ const reducers = combineReducers({
     orderListSearchState : orderListSearchReducer,
     factorySendState : factorySendReducer,
     expressListState : expressListReducer,
-    expressInfoState : expressInfoReducer
+    expressInfoState : expressInfoReducer,
+    orderStatState : orderStatReducer,
+    orderStatSearchState : orderStatSearchReducer
 });
 
 export default reducers;

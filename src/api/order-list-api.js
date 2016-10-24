@@ -15,10 +15,10 @@ export function getOrderList(config, sucCallback, failCallback) {
 
 export function factorySend(config, sucCallback, failCallback) {
     return commonAjax(factorySendUrl, factorySendConfig(config), function (info) {
-
+        
         if (sucCallback) sucCallback();
     }, function (info) {
-        if (failCallback) failCallback();
+        if (failCallback) failCallback(info);
     });
 }
 
@@ -27,7 +27,7 @@ export function getExpressInfo(config, sucCallback, failCallback) {
         store.dispatch(getExpressInfoSuccess(info));
         if (sucCallback) sucCallback();
     }, function (info) {
-        if (failCallback) failCallback();
+        if (failCallback) failCallback(info);
     });
 }
 

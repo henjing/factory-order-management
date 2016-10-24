@@ -18,17 +18,17 @@ const ModalTableRow = React.createClass({
             colList.push(
                 <Col style={{height : '120px', lineHeight : '120px'}}>
                     <Row style={{marginLeft : '-15px', marginRight : '-15px'}}>
-                        <Col span={10} style={colStyle}>
+                        <Col span={14} style={colStyle}>
                             <img src={colSource.goods_img} style={{width: '80px', height: '80px', borderRadius : '6px'}} />
                             &nbsp;
                             <span style={{width : '80px', overflow : 'hidden', textOverflow : 'ellipsis', whiteSpace : 'nowrap'}}>
                                 {colSource.goods_name}
                             </span>
                         </Col>
-                        <Col span={7} style={colStyle}>
+                        <Col span={5} style={colStyle}>
                             {colSource.goods_price}
                         </Col>
-                        <Col span={7} style={colStyle}>
+                        <Col span={5} style={colStyle}>
                             {colSource.goods_num}
                         </Col>
                     </Row>

@@ -49,3 +49,11 @@
 .fixFontAwsome:before {
   font-family: "FontAwesome" !important;
 }
+
+.textCenter {
+    text-align: center;
+}
+
+.textRight {
+    text-align: right;
+}

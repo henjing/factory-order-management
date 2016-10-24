@@ -3,7 +3,6 @@ import classNames from 'classnames';
 const createForm = Form.create;
 const FormItem = Form.Item;
 import React from 'react';
-import './modifyPassword.css'
 import { connect } from 'react-redux';
 import { passwordModalToggle } from '../../actions/admin-actions';
 import { modifyPassword } from '../../api/password-api';
