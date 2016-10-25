@@ -73,7 +73,7 @@ const OrderListContainer = React.createClass({
                     <Col sm={16}>
                         <span className="spanWidth lineHeight">搜索:</span>
                         <SearchInput
-                            placeholder="请输入名字,手机号或订单号"
+                            placeholder="请输入收货人姓名,店铺名,手机号或订单号"
                             updateSearch={this.updateSearch}
                             style={{width : 284, marginLeft : 8, paddingTop : 10}} />
                         <DatePicker

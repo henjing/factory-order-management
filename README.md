@@ -94,29 +94,21 @@ Please contribute to the project if you think this can be done better in anyway 
 2. 按下"A"进入编辑模式,增加host数据后,按下ESC,输入':wq!'退出vim.
 
 改进建议:
-
-2. 将有关store, dispatch, api 的操作都放在helpers文件夹中
+1. store的reducer有,app-interaction-reducer(就可以轻松愉快加Spin了)以及ajax-reducer
+2. 将有关store, dispatch, api 的操作都放在组件中,组件之间不耦合,或者在action中就可以承担很多交互工作
 3. 用webpack设置一个全局对象,包含 React, store, types等等, 因为在每个jsx文件内重复import一些变量真的很烦!
-4. views/ 内的组件不和containers/ 交互,而是和helpers/
-5. 加上Spin, 登录页
+4. views/ 内的组件不和containers/ 交互
 6. 用bootsrap.css美化
 7. 加上mock.js 节省时间
 8. 现在项目规模不大,actions/ 里面只需要两个js文件,action-types.js和common-actions
 9. api/文件也是,就一个api.js就可以的了,只要写好注释
-10. navbar右边靠最右,不留空隙了
-11. 每次交互,不管status是1还是0,都要更新到store里面去,如果.catch(err),才不会更新
+11. 每次交互,不管status是1还是0,都要更新到store里面去,如果.catch(err),才不会更新.-1的话跳转到重新登录
 12. redux async 例子过一遍, 可以先更新interact state
-13. 登录页的设置
 14. 开发东方小金,要用github开一个repo,然后接受两个同事的pull request
 15. 多写注释
 
 
 待解决:
+9.扶贫页面的css被覆盖了
 
-
-
-5. 发货统计的表格加下划线,数字右对齐,其它项居中
-6. 根据厂家种类筛选
-
-8. -1状态就跳转到登录页
 

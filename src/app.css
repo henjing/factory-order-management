@@ -51,9 +51,9 @@
 }
 
 .textCenter {
-    text-align: center;
+    text-align: center !important;
 }
 
 .textRight {
-    text-align: right;
+    text-align: right !important;
 }

@@ -3,7 +3,7 @@ import * as types from '../actions/action-types';
 const initialState = {
     currentPage : 1,
     info : [],
-    status : 1,
+    status : 0,
     totalPage : 1,
     totalRows : 0
 };

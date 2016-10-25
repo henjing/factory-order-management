@@ -69,10 +69,12 @@ const OrderStatContainer = React.createClass({
         const columns = [{
             title : '发货时间',
             dataIndex : 'send_time',
-            key : 'send_time'
+            key : 'send_time',
+            className : 'textCenter'
         }, {
             title : '快递单号',
             key : 'express_sn',
+            className : 'textCenter',
             render : function (text, record, index) {
                 return (
                     <Col>
@@ -83,15 +85,18 @@ const OrderStatContainer = React.createClass({
             }
         }, {
             title : '运费(元)',
-            dataIndex : 'express_fee'
+            dataIndex : 'express_fee',
+            key : 'express_fee',
+            className : 'textRight'
         }, {
             title : '订单编号',
             key : 'record_sn',
+            className : 'textCenter',
             render : function (text, record, index) {
                 return (
                     <Col>
                         {record.order_info.map(function (option) {
-                            return (<p>{option.record_sn}</p>)
+                            return (<Col>{option.record_sn}</Col>)
                         })}
                     </Col>
                 )
@@ -99,6 +104,7 @@ const OrderStatContainer = React.createClass({
         }, {
             title : '购买产品',
             key : 'goods_name',
+            className : 'textCenter',
             render : function (text, record, index) {
                 return (
                     <Col>
@@ -111,6 +117,7 @@ const OrderStatContainer = React.createClass({
         }, {
             title : '购买数量',
             key : 'goods_num',
+            className : 'textCenter',
             render : function (text, record, index) {
                 return (
                     <Col>
@@ -123,10 +130,12 @@ const OrderStatContainer = React.createClass({
         }, {
             title : '社区空店',
             key : 'store_name',
-            dataIndex : 'store_name'
+            dataIndex : 'store_name',
+            className : 'textCenter'
         }, {
             title : '收货地址',
             key : 'address',
+            className : 'textCenter',
             render : function (text, record, index) {
                 return (
                     <Col>
@@ -142,7 +151,7 @@ const OrderStatContainer = React.createClass({
                     <Col sm={16}>
                         <span className="spanWidth lineHeight">搜索:</span>
                         <SearchInput
-                            placeholder="请输入名字,手机号或订单号"
+                            placeholder="请输入快递单号,收货人姓名,店铺名,手机号或订单号"
                             updateSearch={this.updateSearch}
                             style={{width : 284, marginLeft : 8, paddingTop : 10}} />
                         <DatePicker
@@ -155,9 +164,9 @@ const OrderStatContainer = React.createClass({
                     </Col>
                 </Row>
 
-                <FilterPanel />
+                <FilterPanel updateSearch={this.updateSearch} />
                 
-                <Table locale={locale} bordered pagination={pagination} dataSource={orderStat.info} columns={columns} />
+                <Table rowClssName="textCenter" locale={locale} bordered pagination={pagination} dataSource={orderStat.info} columns={columns} />
             </div>
         )
     }

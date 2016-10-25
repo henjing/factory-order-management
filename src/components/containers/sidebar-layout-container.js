@@ -33,12 +33,12 @@ const SidebarLayoutContainer = React.createClass({
                       <SubMenu key="sub1" title={<span><Icon type="home" /><span className={styles.navText}>厂商管理后台</span></span>}>
                         <Menu.Item key={routeBase + 'order_list'}>
                             <Link to={routeBase + 'order_list'}>
-                                我收到的订单
+                                订单管理
                             </Link>
                         </Menu.Item>
                         <Menu.Item key={routeBase + 'order_stat'}>
                             <Link to={routeBase + 'order_stat'}>
-                                已发货的订单
+                                发货记录
                             </Link>
                         </Menu.Item>
                       </SubMenu>

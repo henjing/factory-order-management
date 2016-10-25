@@ -14,6 +14,11 @@ export default function (url, config, suncCallback, failCallback) {
                 // message.warning(response.info);
                 if (failCallback) failCallback(response);
             }
+            return response;
+        }).then(response => {
+            if (response.status == -1) {
+                window.location.pathname = '/SqTest/login.html';
+            }
         }).catch(errHandler)
 }
 
@@ -29,6 +34,11 @@ export function commonGetAjax(url, config, suncCallback, failCallback) {
             if (response.status == 0) {
                 // message.warning(response.info);
                 if (failCallback) failCallback(response);
+            }
+            return response;
+        }).then(response => {
+            if (response.status == -1) {
+                window.location.pathname = '/SqTest/login.html';
             }
         }).catch(errHandler)
 }

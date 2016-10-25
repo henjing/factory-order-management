@@ -44,13 +44,13 @@ const NavbarLayoutContainer = React.createClass({
                                         &nbsp;
                                         <span>{admin.user_name}</span>
                                     </li>
-                                    <li className={styles.navLi + ' ' + styles.setup}>
+                                    {/*<li className={styles.navLi + ' ' + styles.setup}>
                                         <Dropdown overlay={menu}>
                                             <a>
                                                 <span className="fa fa-cog" />
                                             </a>
                                         </Dropdown>
-                                    </li>
+                                    </li>*/}
                                 </ul>
                             </div>
                         </div>

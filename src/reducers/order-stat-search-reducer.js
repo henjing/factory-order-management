@@ -7,7 +7,7 @@ const initialState = {
     search : '',
     timeLimit : '',
     page : 1,
-    goods_id : 'all',
+    goods_id : '',
     no_page : false // 是否分页,默认为分页
 };
 
@@ -24,7 +24,7 @@ const orderListSearchReducer = function (state = initialState, action) {
                 search : '',
                 timeLimit : '',
                 page : 1,
-                goods_id : 'all',
+                goods_id : '',
                 no_page : false // 是否分页,默认为分页
             });
     }

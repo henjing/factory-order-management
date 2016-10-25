@@ -30,11 +30,12 @@ const datePicker = React.createClass({
     render : function () {
         const typeState = this.props.searchState.timeLimit;
         const style = { marginLeft : 8 };
+        const disabled = this.props.searchState.timeLimit ? true : false;
         return (
             <Row>
                 <Col className="lineHeight" style={{minWidth : 640}}>
                     <span className="spanWidth">日期:</span>
-                    <RangePicker style={{ width: 284, marginLeft: 8 }} onChange={this.onChange} />
+                    <RangePicker disabled={disabled} style={{ width: 284, marginLeft: 8 }} onChange={this.onChange} />
                 </Col>
                 <Col className="lineHeight" style={{minWidth : 640}}>
                     <span className="spanWidth">筛选:</span>
