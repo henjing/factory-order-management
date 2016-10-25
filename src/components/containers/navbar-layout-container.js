@@ -24,10 +24,10 @@ const NavbarLayoutContainer = React.createClass({
             <Menu.Item>
               <a href={logoutUrl}>注销</a>
             </Menu.Item>
-            <Menu.Item>
+              {/*<Menu.Item>
                 <span onClick={this.handleClick}>修改密码</span>
                 <ModifyPassword />
-            </Menu.Item>
+            </Menu.Item>*/}
           </Menu>
         );
         const admin = this.props.admin;
@@ -44,13 +44,13 @@ const NavbarLayoutContainer = React.createClass({
                                         &nbsp;
                                         <span>{admin.user_name}</span>
                                     </li>
-                                    {/*<li className={styles.navLi + ' ' + styles.setup}>
+                                    {<li className={styles.navLi + ' ' + styles.setup}>
                                         <Dropdown overlay={menu}>
                                             <a>
                                                 <span className="fa fa-cog" />
                                             </a>
                                         </Dropdown>
-                                    </li>*/}
+                                    </li>}
                                 </ul>
                             </div>
                         </div>

@@ -1,8 +1,8 @@
-// 导出订单数据
-export const enrollCSVUrl = '/Printinfo/storeProductCsv';
-
 // 注销
-export const logoutUrl = '/Base/logout';
+export const logoutUrl = '/Api/index.php/Index/logout';
+
+// 登录页
+export const loginUrl = 'login/index.html';
 
 // 默认头像
 export const defaultAvatar = '/img/avatar.jpg';
@@ -39,6 +39,3 @@ export const getExpressedOrderFileUrl = '/Api/index.php/Index/makeOutExpressSupp
 
 // 导出订单列表
 export const getOrderListFileUrl = '/Api/index.php/Index/makeOutSupplementList';
-
-// 下载页
-export const downloadUrl = '/Api/index.php/Index/download';

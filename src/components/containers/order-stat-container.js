@@ -12,7 +12,7 @@ import { getOrderStatList, getGoodsCategoryList } from '../../api/order-stat-api
 const OrderStatContainer = React.createClass({
 
     componentDidMount() {
-        getOrderStatList({});
+        getOrderStatList({...this.props.searchState});
         getGoodsCategoryList();
     },
     
@@ -61,7 +61,7 @@ const OrderStatContainer = React.createClass({
             current : parseInt(orderStat.currentPage),
             total : orderStat.totalRows,
             onChange : function (page) {
-                console.log('page', page);
+                // console.log('page', page);
                 this.handleClick(page);
             }.bind(this),
             defaultPageSize : 10
@@ -160,7 +160,7 @@ const OrderStatContainer = React.createClass({
                     <Col sm={4} />
                     <Col sm={4} className={styles.lineHeight}>
                         <h1>{orderStat.totalRows}</h1>
-                        <span>订单总数</span>
+                        <span>运单总数</span>
                     </Col>
                 </Row>
 
@@ -174,7 +174,8 @@ const OrderStatContainer = React.createClass({
 
 const mapStateToProps = function (store) {
     return {
-        orderStat : store.orderStatState
+        orderStat : store.orderStatState,
+        searchState : store.orderStatSearchState
     }
 };
 

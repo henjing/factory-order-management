@@ -121,9 +121,9 @@ const OrderListTableRow = React.createClass({
         let colList = [];
         const rowStyle = { height : '40px', lineHeight : '40px', background : '#f6f9fb', marginLeft : '-15px', marginRight : '-15px'};
         const height = 120 * length + 'px';
+        let i = 0;
 
         while (length > 0) {
-            let i = 0;
             let colSource = dataSource.goods_info[i];
             colList.push(
                 <Col style={{height : '120px', lineHeight : '120px'}}>

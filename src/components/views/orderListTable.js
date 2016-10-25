@@ -56,12 +56,13 @@ const OrderListTable = React.createClass({
             )
         } else {
             for (let i = 0; i < dataSourceList.length; i++) {
+                const dataSource = dataSourceList[i];
                 tableRowList.push(
                     <TableRow
-                        key={dataSourceList[i]['record_sn']}
+                        key={dataSource['record_sn']}
                         isSameAddress={this.isSameAddress}
                         modalClick={this.props.modalClick}
-                        dataSource={dataSourceList[i]}  />
+                        dataSource={dataSource}  />
                 )
             }
         }

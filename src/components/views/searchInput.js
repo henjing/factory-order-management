@@ -3,6 +3,7 @@ import { Input, Button } from 'antd';
 import classNames from 'classnames';
 const InputGroup = Input.Group;
 import { connect } from 'react-redux';
+import _ from 'lodash';
 
 const SearchInput = React.createClass({
   getInitialState() {
@@ -11,14 +12,23 @@ const SearchInput = React.createClass({
     };
   },
 
+  componentWillMount() {
+    this.callDispatch = _.debounce(this.callDispatch, 1);
+  },
+
   handleFocusBlur(e) {
     this.setState({
       focus: e.target === document.activeElement,
     });
   },
 
-  handleInputChange(e) {
-      this.props.updateSearch('search')(e.target.value);
+  callDispatch(value) {
+      console.log('value', value);
+      this.props.updateSearch('search')(value);
+  },
+
+  printChange(e) {
+      this.callDispatch(e.target.value);
   },
 
   render() {
@@ -34,7 +44,7 @@ const SearchInput = React.createClass({
     return (
       <div className="ant-search-input-wrapper lineHeight" style={style}>
         <InputGroup className={searchCls}>
-          <Input placeholder={placeholder} value={value} onChange={this.handleInputChange}
+          <Input placeholder={placeholder} value={value} onChange={this.printChange}
             onFocus={this.handleFocusBlur} onBlur={this.handleFocusBlur} onPressEnter={this.props.updateSearch('commit')}
           />
           <div className="ant-input-group-wrap">

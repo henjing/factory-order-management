@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { message } from 'antd';
+import { loginUrl } from '../appConstants/urlConfig';
 
 export default function (url, config, suncCallback, failCallback) {
     return axios.post(url, formData(config))
@@ -17,7 +18,7 @@ export default function (url, config, suncCallback, failCallback) {
             return response;
         }).then(response => {
             if (response.status == -1) {
-                window.location.pathname = '/SqTest/login.html';
+                window.location.pathname = loginUrl;
             }
         }).catch(errHandler)
 }
@@ -38,7 +39,7 @@ export function commonGetAjax(url, config, suncCallback, failCallback) {
             return response;
         }).then(response => {
             if (response.status == -1) {
-                window.location.pathname = '/SqTest/login.html';
+                window.location.pathname = loginUrl;
             }
         }).catch(errHandler)
 }
@@ -48,7 +49,7 @@ function errHandler(err) {
 }
 
 function formData(config) {
-    console.log('11111111111', config);
+    // console.log('11111111111', config);
     let formData = new FormData();
     
     for (let i in config) {
