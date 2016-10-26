@@ -19,6 +19,8 @@ const OrderListTable = React.createClass({
             } else {
                 message.error('收货地址不一致,无法合并发货!');
             }
+        } else {
+            message.error('目前未选择任何订单');
         }
     },
 
@@ -66,7 +68,7 @@ const OrderListTable = React.createClass({
                 )
             }
         }
-        const disabled = this.props.searchState.status != '0';
+        const disabled = this.props.searchState.status == '1' || this.props.searchState.status == '2';
         const checked = this.props.sendState.selectedAll;
         const type = this.props.sendState.info.length > 0 ? {type : 'primary'} : {};
 
@@ -81,8 +83,12 @@ const OrderListTable = React.createClass({
                     <Col style={colStyle} span={4}>交易状态</Col>
                 </Row>
                 <Row>
-                    <Col style={{ marginLeft : '7px' }}>
-                        <Checkbox onChange={this.onChange} checked={checked} disabled={disabled} ><Button {...type} onClick={this.buttonClick} disabled={disabled}>批量发货</Button></Checkbox>
+                    <Col style={{ marginLeft : '7px', marginTop : '5px' }}>
+                        <Checkbox onChange={this.onChange} checked={checked} disabled={disabled} >
+                            <Button {...type} onClick={this.buttonClick} disabled={disabled}>
+                                批量发货
+                            </Button>
+                        </Checkbox>
                     </Col>
                 </Row>
 

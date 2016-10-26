@@ -100,18 +100,14 @@ Please contribute to the project if you think this can be done better in anyway 
 4. views/ 内的组件不和containers/ 交互
 6. 用bootsrap.css美化
 7. 加上mock.js 节省时间
-8. 现在项目规模不大,actions/ 里面只需要两个js文件,action-types.js和common-actions
 9. api/文件也是,就一个api.js就可以的了,只要写好注释
-11. 每次交互,不管status是1还是0,都要更新到store(映射)里面去,如果.catch(err),才不会更新.-1的话跳转到重新登录
 12. redux async 例子过一遍, 可以先更新interact state
-14. 开发东方小金,要用github开一个repo,然后接受两个同事的pull request
-
 
 
 待解决:
-9.扶贫页面的css被覆盖了
-10.发货操作有bug
-11. 物流信息显示在发货记录里面
+
 12. 物流信息要图文并茂
 13. 修改单号操作
-14. 新版工程目录,多加注释
+14. github改成分支合并
+15. 东方小金加登录页和单页应用
+16. 可以用mock在家工作了

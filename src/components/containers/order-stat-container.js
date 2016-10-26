@@ -1,19 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styles from '../../app.less';
-import { Row, Col, Table } from 'antd';
+import { Row, Col, Table, message, Button } from 'antd';
 import SearchInput from '../views/order-stat-searchInput';
 import DatePicker from '../views/order-stat-datePicker';
 import FilterPanel from '../views/order-stat-filterPanel';
 import store from '../../store';
 import { updateOrderStatSearch, resetOrderStatSearch} from '../../actions/order-stat-actions';
+import { getExpressInfoSuccess, expressInfoModalToggle } from '../../actions/order-list-actions';
 import { getOrderStatList, getGoodsCategoryList } from '../../api/order-stat-api';
+import { getExpressInfo } from '../../api/order-list-api';
+import ExpressInfoModal from '../views/expressInfoModal';
 
 const OrderStatContainer = React.createClass({
 
     componentDidMount() {
         getOrderStatList({...this.props.searchState});
         getGoodsCategoryList();
+    },
+
+    expressClick(record) {
+        return function () {
+            let express_sn = record.express_sn;
+            store.dispatch(getExpressInfoSuccess({express_sn : express_sn}));
+            getExpressInfo({express_sn : express_sn}, function () {
+                store.dispatch(expressInfoModalToggle());
+            }, function (info) {
+                message.error(info.info);
+            });
+        }.bind(this);
     },
     
     updateSearch(key, value1) {
@@ -144,6 +159,17 @@ const OrderStatContainer = React.createClass({
                     </Col>
                 )
             }
+        }, {
+            title : '物流信息',
+            // key : 'express_sn',
+            className : 'textCenter',
+            render : function (text, record, index) {
+                return (
+                    <Col>
+                        <Button onClick={this.expressClick(record)}>物流信息</Button>
+                    </Col>
+                )
+            }.bind(this)
         }];
         return (
             <div className="container-fluid">
@@ -151,7 +177,7 @@ const OrderStatContainer = React.createClass({
                     <Col sm={16}>
                         <span className="spanWidth lineHeight">搜索:</span>
                         <SearchInput
-                            placeholder="请输入快递单号,收货人姓名,店铺名,手机号或订单号"
+                            placeholder="快递单号,收货人姓名,店铺名,手机号或订单号"
                             updateSearch={this.updateSearch}
                             style={{width : 284, marginLeft : 8, paddingTop : 10}} />
                         <DatePicker
@@ -167,6 +193,8 @@ const OrderStatContainer = React.createClass({
                 <FilterPanel updateSearch={this.updateSearch} />
                 
                 <Table rowClssName="textCenter" locale={locale} bordered pagination={pagination} dataSource={orderStat.info} columns={columns} />
+
+                <ExpressInfoModal />
             </div>
         )
     }

@@ -14,7 +14,8 @@ const FilterPanel = React.createClass({
                 store.dispatch(resetOrderListSearch());
                 this.props.updateSearch(key, value)();
                 
-                if (this.state.stayNight == '0') {
+                // if (this.state.stayNight == '0') {
+                if (true) {
                     console.log('执行selectedALl :false');
                     store.dispatch(sendModalDataSource({ selectedAll : false}));
                     store.dispatch(sendModalDataSource({ info :[] }));

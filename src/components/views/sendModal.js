@@ -36,6 +36,7 @@ let SendModal = React.createClass({
     hideModal() {
         this.props.closeModal();
         this.props.form.resetFields();
+        store.dispatch(sendModalDataSource({ selectedAll : false, info : []}));
     },
 
     express_sn(rule, value, callback) {

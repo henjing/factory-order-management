@@ -8,21 +8,20 @@ import _ from 'lodash';
 
 const OrderListTableRow = React.createClass({
 
-    // sendModalClick(dataSource) {
-    //     return function () {
-    //
-    //         this.props.modalClick(dataSource);
-    //     }.bind(this);
-    // },
-
     sendModalClick(dataSource) {
         return function () {
-            if (this.props.isSameAddress()) {
-                store.dispatch(sendModalToggle());
-            } else {
-                message.error('收货地址不一致,无法合并发货!');
-            }
-
+            // store.dispatch(sendModalDataSource({ selectedAll : false}));
+            // setTimeout(function () {
+            //     this.onChange(dataSource)({target : { checked : true }});
+            //     store.dispatch(sendModalToggle());
+            // }.bind(this), 80);
+            // if (this.props.isSameAddress()) {
+            //     store.dispatch(sendModalToggle());
+            // } else {
+            //     message.error('收货地址不一致,无法合并发货!');
+            // }
+            store.dispatch(sendModalDataSource({ info : [dataSource] }));
+            store.dispatch(sendModalToggle());
         }.bind(this);
     },
 
@@ -67,7 +66,8 @@ const OrderListTableRow = React.createClass({
         return function (e) {
             // console.log('datasource clicked');
             if (e.target.checked) {
-                if (this.props.searchState.status == '0') {
+                // if (this.props.searchState.status == '0') {
+                if (dataSource.status == '0') {
                     // console.log('status', this.props.searchState.status);
                     if (dataSource.status == '0') {
                         const record_sn_List = this.props.sendState.info.map(function (option) {
@@ -148,11 +148,27 @@ const OrderListTableRow = React.createClass({
             length--;
         };
 
-        const checked = this.state.selected;
-        const disabled = this.props.searchState.status != '0';
-        const checkboxInsideOrOutside = disabled ? (
+        // const checked = this.state.selected;
+        const checked = (function () {
+            if (this.props.dataSource.status == '0') {
+                const record_sn_List = this.props.sendState.info.map(function (option) {
+                    return option.record_sn;
+                });
+                const index = _.findIndex(record_sn_List, function (o) {
+                    return o == this.props.dataSource.record_sn;
+                }.bind(this));
+                const ischecked = (index != -1);
+                return ischecked;
+            } else {
+                return false;
+            }
+
+        }.bind(this))();
+        // const disabled = this.props.searchState.status != '0';
+        const isSend = this.props.dataSource.status != '0';
+        const checkboxInsideOrOutside = isSend ? (
             <Col style={{marginLeft : '22px'}}>
-                <Checkbox checked={checked} disabled={disabled} onChange={this.onChange(dataSource)} >
+                <Checkbox checked={checked} disabled={isSend} onChange={this.onChange(dataSource)} >
                 </Checkbox>
                     &nbsp; {dataSource.add_time} &nbsp;
                     订单号: {dataSource.record_sn} &nbsp;
@@ -161,7 +177,7 @@ const OrderListTableRow = React.createClass({
             </Col>
         ) : (
             <Col style={{marginLeft : '22px'}}>
-                <Checkbox checked={checked} disabled={disabled} onChange={this.onChange(dataSource)} >
+                <Checkbox checked={checked} disabled={isSend} onChange={this.onChange(dataSource)} >
                     {dataSource.add_time} &nbsp;
                     订单号: {dataSource.record_sn} &nbsp;
                     <Icon style={{color : 'red'}} type="home" /> &nbsp;
@@ -191,7 +207,7 @@ const OrderListTableRow = React.createClass({
                     </Col>
                     <Col style={{ height : height, display : 'flex', flexDirection : 'column', alignItems : 'center', justifyContent : 'center' }} span={4}>
                         <p style={{marginBottom : '5px'}}>
-                            <Button disabled={!checked} onClick={this.sendModalClick(dataSource)}>我要发货</Button>
+                            <Button disabled={isSend} onClick={this.sendModalClick(dataSource)}>单独发货</Button>
                         </p>
                         <p>
                             <Button onClick={this.infoModalClick(dataSource)} disabled={dataSource.status == '0' }>物流信息</Button>
