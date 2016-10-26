@@ -25,6 +25,9 @@ const FilterPanel = React.createClass({
                 )
             }
         }
+        inputGroup.push(
+            <input type="hidden" name="no_page" value="true" />
+        );
         if (status != 0) {
             finalInputGroup = inputGroup;
             disabled = false;

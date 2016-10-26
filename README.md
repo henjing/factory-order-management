@@ -108,6 +108,4 @@ Please contribute to the project if you think this can be done better in anyway 
 
 12. 物流信息要图文并茂
 13. 修改单号操作
-14. github改成分支合并
-15. 东方小金加登录页和单页应用
 16. 可以用mock在家工作了

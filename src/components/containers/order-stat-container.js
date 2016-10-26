@@ -19,15 +19,24 @@ const OrderStatContainer = React.createClass({
         getGoodsCategoryList();
     },
 
+    getInitialState() {
+        return {
+            isSpin : false
+        }
+    },
+
     expressClick(record) {
         return function () {
+            this.setState({ isSpin : true });
             let express_sn = record.express_sn;
             store.dispatch(getExpressInfoSuccess({express_sn : express_sn}));
             getExpressInfo({express_sn : express_sn}, function () {
+                this.setState({ isSpin : false });
                 store.dispatch(expressInfoModalToggle());
-            }, function (info) {
+            }.bind(this), function (info) {
+                this.setState({ isSpin : false });
                 message.error(info.info);
-            });
+            }.bind(this));
         }.bind(this);
     },
     
@@ -171,6 +180,8 @@ const OrderStatContainer = React.createClass({
                 )
             }.bind(this)
         }];
+
+        const isSpin = this.state.isSpin;
         return (
             <div className="container-fluid">
                 <Row>
@@ -192,7 +203,7 @@ const OrderStatContainer = React.createClass({
 
                 <FilterPanel updateSearch={this.updateSearch} />
                 
-                <Table rowClssName="textCenter" locale={locale} bordered pagination={pagination} dataSource={orderStat.info} columns={columns} />
+                <Table loading={isSpin} rowClssName="textCenter" locale={locale} bordered pagination={pagination} dataSource={orderStat.info} columns={columns} />
 
                 <ExpressInfoModal />
             </div>

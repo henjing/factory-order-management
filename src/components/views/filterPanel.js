@@ -53,6 +53,9 @@ const FilterPanel = React.createClass({
                 )
             }
         }
+        inputGroup.push(
+            <input type="hidden" name="no_page" value="true" />
+        );
         if (downloadStatus != 0) {
             finalInputGroup = inputGroup;
             disabled = false;
