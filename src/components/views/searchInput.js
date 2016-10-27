@@ -13,7 +13,7 @@ const SearchInput = React.createClass({
   },
 
   componentWillMount() {
-    this.callDispatch = _.debounce(this.callDispatch, 1);
+    // this.callDispatch = _.debounce(this.callDispatch, 1);
   },
 
   handleFocusBlur(e) {

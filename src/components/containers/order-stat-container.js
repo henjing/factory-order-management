@@ -29,7 +29,7 @@ const OrderStatContainer = React.createClass({
         return function () {
             this.setState({ isSpin : true });
             let express_sn = record.express_sn;
-            store.dispatch(getExpressInfoSuccess({express_sn : express_sn}));
+            store.dispatch(getExpressInfoSuccess({...record}));
             getExpressInfo({express_sn : express_sn}, function () {
                 this.setState({ isSpin : false });
                 store.dispatch(expressInfoModalToggle());
@@ -169,13 +169,13 @@ const OrderStatContainer = React.createClass({
                 )
             }
         }, {
-            title : '物流信息',
+            title : '物流详情',
             // key : 'express_sn',
             className : 'textCenter',
             render : function (text, record, index) {
                 return (
                     <Col>
-                        <Button onClick={this.expressClick(record)}>物流信息</Button>
+                        <Button onClick={this.expressClick(record)}>点击查看</Button>
                     </Col>
                 )
             }.bind(this)
