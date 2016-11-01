@@ -108,8 +108,3 @@ Please contribute to the project if you think this can be done better in anyway 
 
 12. 物流信息要图文并茂
 13. 修改单号操作
-16. 可以用mock在家工作了
-17. 向上的修改建议
-18. 表格美化
-19. 物流信息要显示数量
-20. 显示发货统计那一列 各个商品的数量

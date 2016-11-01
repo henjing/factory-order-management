@@ -20,7 +20,7 @@ const ExpressInfoModal = React.createClass({
             });
         } catch (e) {}
         return (
-            <Modal title="物流信息" visible={visible} onOk={this.hideModal} onCancel={this.hideModal} >
+            <Modal width="600px" title="物流信息" visible={visible} onOk={this.hideModal} onCancel={this.hideModal} >
                 <Row>
                     <Col style={{marginLeft : '42px'}}>
                         <h4>快递公司: {express_company}</h4>

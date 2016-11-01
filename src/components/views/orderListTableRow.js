@@ -35,11 +35,14 @@ const OrderListTableRow = React.createClass({
         return function () {
             let express_sn = dataSource.express_sn;
             store.dispatch(getExpressInfoSuccess({...dataSource}));
+            this.props.openSpin();
             getExpressInfo({express_sn : express_sn}, function () {
                 store.dispatch(expressInfoModalToggle());
-            }, function (info) {
+                this.props.closeSpin();
+            }.bind(this), function (info) {
                 message.error(info.info);
-            });
+                this.props.closeSpin();
+            }.bind(this));
         }.bind(this);
     },
 
@@ -119,7 +122,7 @@ const OrderListTableRow = React.createClass({
         let length = 0;
         try { length = dataSource.goods_info.length } catch (e) {}
         let colList = [];
-        const rowStyle = { height : '40px', lineHeight : '40px', background : '#f6f9fb', marginLeft : '-15px', marginRight : '-15px'};
+        const rowStyle = { height : '40px', lineHeight : '40px', background : '#f7f7f7', marginLeft : '-15px', marginRight : '-15px'};
         const height = 120 * length + 'px';
         let i = 0;
 

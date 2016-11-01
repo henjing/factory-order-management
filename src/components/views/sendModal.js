@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Select, Modal, Row, Col, Icon, Input, message } from 'antd';
+import { Form, Select, Modal, Row, Col, Icon, Input, message, InputNumber } from 'antd';
 import { connect } from 'react-redux';
 const FormItem = Form.Item;
 const createForm = Form.create;
@@ -33,6 +33,33 @@ let SendModal = React.createClass({
         });
     },
 
+    generateSum() {
+        let generatedSum = [];
+        let goodsView = {};
+        let total = 0;
+        this.props.factorySendState.info.forEach(function (option) {
+            option.goods_info.forEach(function (option) {
+                let atomGoods = {
+                    goods_name : option.goods_name,
+                    goods_num : option.goods_num,
+                    goods_price : option.goods_price
+                };
+                total += option.goods_num * option.goods_price;
+                generatedSum.push(atomGoods);
+            })
+        });
+        for (let i = 0; i < generatedSum.length; i++) {
+            if (!goodsView[generatedSum[i]['goods_name']]) {
+                goodsView[generatedSum[i]['goods_name']] = generatedSum[i]['goods_num'];
+            } else {
+                goodsView[generatedSum[i]['goods_name']] += generatedSum[i]['goods_num'];
+            }
+        };
+        goodsView['总价'] = total;
+        // console.log(generatedSum, goodsView);
+        return goodsView;
+    },
+
     hideModal() {
         this.props.closeModal();
         this.props.form.resetFields();
@@ -41,10 +68,22 @@ let SendModal = React.createClass({
 
     express_sn(rule, value, callback) {
         try {
-            if (value.length > 5) {
+            if (/[a-zA-Z\d]{6,30}/.test(value)) {
                 callback();
             } else {
-                callback(['单号必须6位以上']);
+                callback(['单号必须是6位以上的字母或数字']);
+            }
+        } catch (e) {
+            callback(['填写有误']);
+        }
+    },
+
+    express_fee(rule, value, callback) {
+        try {
+            if (parseFloat(value) >= 0) {
+                callback();
+            } else {
+                callback(['不能输入负数'])
             }
         } catch (e) {
             callback(['填写有误']);
@@ -78,6 +117,18 @@ let SendModal = React.createClass({
             )
         }
 
+        let totalCount = [];
+        let result = this.generateSum();
+        let n = 0;
+        for (let key in result) {
+            // console.log('key', key, 'result', result, result[key]);
+            totalCount.push(
+                <Col key={key}>{key} : {result[key]}</Col>
+            );
+            n++;
+        }
+        let height = n * 25 + 'px';
+
         const { getFieldDecorator } = this.props.form;
         let { expressList } = this.props;
         const formItemLayout = {
@@ -107,12 +158,25 @@ let SendModal = React.createClass({
                     </Col>
                 </Row>
 
+                <Row style={{ borderTop : '1px solid #f7f7f7', borderBottom : '1px solid #f7f7f7', marginBottom : '10px'}}>
+                    <Col sm={12}>
+                        <Row style={{height : height}} type="flex" align="middle" justify="center">
+                            <Col>合计:</Col>
+                        </Row>
+                    </Col>
+                    <Col sm={12}>
+                        <Row style={{height : height, display : 'flex', flexDirection : 'column', justifyContent : 'center'}}>
+                            {totalCount}
+                        </Row>
+                    </Col>
+                </Row>
+
                 <Row>
                     <Col/>
                 </Row>
                 <Row>
                     <Col>
-                        <Form inline onSubmit={this.test}>
+                        <Form inline>
                             <FormItem
                                 {...formItemLayout} style={{width : '360px'}}
                                 hasFeedback label="物流公司">
@@ -140,7 +204,7 @@ let SendModal = React.createClass({
                                 {...formItemLayout} style={{width : '360px'}}
                                 hasFeedback label="运费(元)">
                                 {getFieldDecorator('express_fee', {
-                                    rules : [{ required : true, whitespace : true, message : '填写快递运费' }]
+                                    rules : [{ required : true, whitespace : true, message : '填写快递运费' }, {validator : this.express_fee}]
                                 })(
                                     <Input style={{width : '268px'}} type="number"/>
                                 )}

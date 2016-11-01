@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Checkbox, Button, Icon, Pagination, message } from 'antd';
+import { Row, Col, Checkbox, Button, Icon, Pagination, message, Spin } from 'antd';
 import TableRow from './orderListTableRow';
 import { connect } from 'react-redux';
 import store from '../../store';
@@ -10,6 +10,20 @@ const OrderListTable = React.createClass({
     handleClick(page) {
         this.props.updateSearch('page', page)();
         this.props.updateSearch('commit')();
+    },
+
+    getInitialState() {
+        return {
+            isSpin : false
+        }
+    },
+
+    openSpin() {
+        this.setState({ isSpin : true});
+    },
+
+    closeSpin() {
+        this.setState({ isSpin : false });
     },
 
     buttonClick() {
@@ -47,14 +61,14 @@ const OrderListTable = React.createClass({
 
     render() {
         const { dataSourceList, total, currentPage, status } = this.props;
-        const rowStyle = { height : '40px', lineHeight : '40px', background : '#f6f9fb', marginLeft : '-15px', marginRight : '-15px'};
+        const rowStyle = { height : '40px', lineHeight : '40px', background : '#f7f7f7', marginLeft : '-15px', marginRight : '-15px', fontWeight : '700'};
         const colStyle = { textAlign : 'center'};
 
         let tableRowList = [];
 
         if (status == 0) {
             tableRowList = (
-                <h1 style={{textAlign : 'center'}}>当前搜索条件下,结果为空,请尝试"重置搜索条件"按钮!</h1>
+                <div className="ant-table-placeholder">当前搜索条件下,结果为空,请尝试"重置搜索条件"按钮!</div>
             )
         } else {
             for (let i = 0; i < dataSourceList.length; i++) {
@@ -62,6 +76,7 @@ const OrderListTable = React.createClass({
                 tableRowList.push(
                     <TableRow
                         key={dataSource['record_sn']}
+                        isSpin={this.state.isSpin} openSpin={this.openSpin} closeSpin={this.closeSpin}
                         isSameAddress={this.isSameAddress}
                         modalClick={this.props.modalClick}
                         dataSource={dataSource}  />
@@ -73,7 +88,7 @@ const OrderListTable = React.createClass({
         const type = this.props.sendState.info.length > 0 ? {type : 'primary'} : {};
 
         return (
-            <div>
+            <Spin spinning={this.state.isSpin}>
                 <Row style={rowStyle} >
                     <Col style={colStyle} span={5}>产品名称</Col>
                     <Col style={colStyle} span={3}>单价</Col>
@@ -82,24 +97,31 @@ const OrderListTable = React.createClass({
                     <Col style={colStyle} span={5}>收货地址</Col>
                     <Col style={colStyle} span={4}>交易状态</Col>
                 </Row>
-                <Row>
-                    <Col style={{ marginLeft : '7px', marginTop : '5px' }}>
-                        <Checkbox onChange={this.onChange} checked={checked} disabled={disabled} >
-                            <Button {...type} onClick={this.buttonClick} disabled={disabled}>
-                                批量发货
-                            </Button>
-                        </Checkbox>
-                    </Col>
-                </Row>
+                { status != 0 ? (
+                    <Row>
+                        <Col style={{ marginLeft : '7px', marginTop : '5px' }}>
+                            <Checkbox onChange={this.onChange} checked={checked} disabled={disabled} >
+                                <Button {...type} onClick={this.buttonClick} disabled={disabled}>
+                                    批量发货
+                                </Button>
+                            </Checkbox>
+                        </Col>
+                    </Row>
+                ) : '' }
+
 
                 {tableRowList}
 
-                <Row type="flex" align="middle" justify="center">
-                    <Col>
-                        <Pagination onChange={this.handleClick} defaultPageSize={5} total={total} current={parseInt(currentPage)}  />
-                    </Col>
-                </Row>
-            </div>
+                { status != 0 ? (
+                    <Row type="flex" align="middle" justify="center">
+                        <Col>
+                            <Pagination onChange={this.handleClick} defaultPageSize={5} total={total} current={parseInt(currentPage)}  />
+                        </Col>
+                    </Row>
+                ) : '' }
+
+
+            </Spin>
         )
     }
 });
