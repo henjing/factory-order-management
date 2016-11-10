@@ -80,7 +80,7 @@ let SendModal = React.createClass({
 
     express_fee(rule, value, callback) {
         try {
-            if (parseFloat(value) >= 0) {
+            if (parseFloat(value) >= 0 || !parseFloat(value)) {
                 callback();
             } else {
                 callback(['不能输入负数'])
@@ -140,6 +140,7 @@ let SendModal = React.createClass({
             selectOptions = expressList.map(function (item, index) {
                 return <Option key={index} value={item}>{item}</Option>
             });
+            selectOptions.unshift(<Option key={'上门自提'} value={'上门自提'}>{'上门自提'}</Option>)
         } catch (e) {}
 
         return (
@@ -195,7 +196,7 @@ let SendModal = React.createClass({
                                 {...formItemLayout} style={{width : '360px'}}
                                 hasFeedback label="快递单号">
                                 {getFieldDecorator('express_sn', {
-                                    rules : [{ required : true, whitespace : true, message : '请输入快递单号' }, {validator : this.express_sn}]
+                                    rules : [{ whitespace : true, message : '请输入快递单号' }, {validator : this.express_sn}]
                                 })(
                                     <Input style={{width : '268px'}}/>
                                 )}
@@ -204,7 +205,7 @@ let SendModal = React.createClass({
                                 {...formItemLayout} style={{width : '360px'}}
                                 hasFeedback label="运费(元)">
                                 {getFieldDecorator('express_fee', {
-                                    rules : [{ required : true, whitespace : true, message : '填写快递运费' }, {validator : this.express_fee}]
+                                    rules : [{ whitespace : true, message : '填写快递运费' }, {validator : this.express_fee}]
                                 })(
                                     <Input style={{width : '268px'}} type="number"/>
                                 )}

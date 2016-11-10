@@ -39,3 +39,6 @@ export const getExpressedOrderFileUrl = '/Api/index.php/Index/makeOutExpressSupp
 
 // 导出订单列表
 export const getOrderListFileUrl = '/Api/index.php/Index/makeOutSupplementList';
+
+// 修改快递单号
+export const modifyExpressNumUrl = '/Api/index.php/Index/modifyExpressSn';
