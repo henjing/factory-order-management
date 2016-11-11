@@ -96,7 +96,7 @@ const ExpressInfoModal = React.createClass({
                         </div>
                     </Col>
                 </Row>
-                <Row>
+                <Row style={{marginTop : '20px'}}>
                     <Col>
                         {/*<Steps direction="vertical">
                             {stepList}

@@ -62,7 +62,7 @@ const FilterPanel = React.createClass({
         };
 
         return (
-            <Row type="flex" align="middle" style={{ marginLeft : 88, height : 100 }}>
+            <Row type="flex" align="middle" style={{ marginLeft : 88, height : 80 }}>
                 <Col span={16} >
                     <Button onClick={this.handleClick('status', 'all')} type={status == 'all' ? 'primary' : ''} >全部订单</Button>
                     <Button onClick={this.handleClick('status', '1')} type={status == '1' || status == '2' ? 'primary' : ''} style={{marginLeft : 8}}>已发货订单</Button>

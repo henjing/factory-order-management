@@ -70,7 +70,7 @@ const OrderListContainer = React.createClass({
         return (
             <div className="container-fluid">
                 <Row>
-                    <Col sm={16}>
+                    <Col sm={20}>
                         <span className="spanWidth lineHeight">搜索:</span>
                         <SearchInput
                             placeholder="请输入收货人姓名,店铺名,手机号或订单号"
@@ -79,7 +79,7 @@ const OrderListContainer = React.createClass({
                         <DatePicker
                             updateSearch={this.updateSearch}/>
                     </Col>
-                    <Col sm={4}></Col>
+                    
                     <Col sm={4} className={styles.lineHeight}>
                         <h1>{orderList.totalRows}</h1>
                         <span>订单总数</span>

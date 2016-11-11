@@ -9,7 +9,7 @@ import {updateOrderStatSearch} from '../../actions/order-stat-actions';
 const FilterPanel = React.createClass({
 
     onSelect(value) {
-        store.dispatch(updateOrderStatSearch({goods_id : value}));
+        store.dispatch(updateOrderStatSearch({goods_id : value, page : 1}));
         this.props.updateSearch('commit')();
     },
 
@@ -63,7 +63,7 @@ const FilterPanel = React.createClass({
         }
 
         return (
-            <Row type="flex" align="middle" style={{ marginLeft : 88, height : 100 }}>
+            <Row type="flex" align="middle" style={{ marginLeft : 88, height : 80 }}>
                 <Col span={16} >
                     {wholeSelect}
                 </Col>

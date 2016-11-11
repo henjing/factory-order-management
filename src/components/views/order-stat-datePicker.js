@@ -3,10 +3,14 @@ import React from 'react';
 const RangePicker = DatePicker.RangePicker;
 import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
+import store from '../../store';
+import { updateOrderStatSearch } from '../../actions/order-stat-actions';
+
 
 const datePicker = React.createClass({
 
     onChange(dates, dateStrings) {
+        store.dispatch(updateOrderStatSearch({ page : 1 }));
         this.props.updateSearch('dateStart')(dateStrings[0]);
         this.props.updateSearch('dateEnd')(dateStrings[1]);
         this.props.updateSearch('commit')();
@@ -14,6 +18,7 @@ const datePicker = React.createClass({
 
     handleClick(timeLimit) {
         return (() => {
+            store.dispatch(updateOrderStatSearch({ page : 1 }));
             this.props.updateSearch('timeLimit')(timeLimit);
             this.props.updateSearch('commit')();
         }).bind(this);

@@ -4,6 +4,8 @@ import classNames from 'classnames';
 const InputGroup = Input.Group;
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import store from '../../store';
+import { updateOrderListSearch, resetOrderListSearch } from '../../actions/order-list-actions';
 
 const SearchInput = React.createClass({
   getInitialState() {
@@ -31,6 +33,11 @@ const SearchInput = React.createClass({
       this.callDispatch(e.target.value);
   },
 
+  handleSearch() {
+      store.dispatch(updateOrderListSearch({ page : 1 }));
+      this.props.updateSearch('commmit')();
+  },
+
   render() {
     const { style, placeholder, value } = this.props;
     const btnCls = classNames({
@@ -45,10 +52,10 @@ const SearchInput = React.createClass({
       <div className="ant-search-input-wrapper lineHeight" style={style}>
         <InputGroup className={searchCls}>
           <Input placeholder={placeholder} value={value} onChange={this.printChange}
-            onFocus={this.handleFocusBlur} onBlur={this.handleFocusBlur} onPressEnter={this.props.updateSearch('commit')}
+            onFocus={this.handleFocusBlur} onBlur={this.handleFocusBlur} onPressEnter={this.handleSearch}
           />
           <div className="ant-input-group-wrap">
-            <Button icon="search" className={btnCls} onClick={this.props.updateSearch('commit')} />
+            <Button icon="search" className={btnCls} onClick={this.handleSearch} />
           </div>
         </InputGroup>
       </div>
