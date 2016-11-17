@@ -42,3 +42,10 @@ export const getOrderListFileUrl = '/Api/index.php/Index/makeOutSupplementList';
 
 // 修改快递单号
 export const modifyExpressNumUrl = '/Api/index.php/Index/modifyExpressSn';
+
+////////////////////////厂商提现
+// 查询订单数,以及是否达到提现额度
+export const getFactoryAccountOverviewUrl = '/Api/index.php/Index/factoryAccountShow';
+// 提交提现申请
+export const getFactoryCashierUrl = '/Api/index.php/Index/factoryAccount';
+// 获取提现订单列表

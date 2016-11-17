@@ -203,7 +203,7 @@ const OrderStatContainer = React.createClass({
 
                 <FilterPanel updateSearch={this.updateSearch} />
                 
-                <Table loading={isSpin} rowClssName="textCenter" locale={locale} bordered pagination={pagination} dataSource={orderStat.info} columns={columns} />
+                <Table style={{marginLeft : '-15px', marginRight : '-15px'}} loading={isSpin} rowClssName="textCenter" locale={locale} bordered pagination={pagination} dataSource={orderStat.info} columns={columns} />
 
                 <ExpressInfoModal />
             </div>

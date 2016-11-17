@@ -32,7 +32,7 @@ const NavbarLayoutContainer = React.createClass({
         );
         const admin = this.props.admin;
         return (
-            <nav className="navbar navbar-default navbar-fixed">
+            <nav className="navbar navbar-default navbar-fixed" style={{marginBottom : '0px', background : 'transparent'}}>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-sm-12">
