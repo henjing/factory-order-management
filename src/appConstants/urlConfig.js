@@ -48,4 +48,5 @@ export const modifyExpressNumUrl = '/Api/index.php/Index/modifyExpressSn';
 export const getFactoryAccountOverviewUrl = '/Api/index.php/Index/factoryAccountShow';
 // 提交提现申请
 export const getFactoryCashierUrl = '/Api/index.php/Index/factoryAccount';
-// 获取提现订单列表
+// 获取提现申请列表(包括结算,付款,审核,驳回)
+export const getFactoryCashierResultUrl = '/Api/index.php/Index/factoryAccountList';

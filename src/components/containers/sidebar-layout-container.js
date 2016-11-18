@@ -18,7 +18,7 @@ const SidebarLayoutContainer = React.createClass({
     matchSubMenu(pathName) {
         const subMenuArray =  {
             'sub1' : ['/order_list', '/order_stat'],
-            'sub2' : ['/cashier', '/apply_append', '/pay_append', '/pay_success', '/apply_deny'],
+            'sub2' : ['/cashier', '/not_yet_balance', '/balance_order', '/apply_append', '/pay_append', '/pay_success', '/apply_deny', '/template'],
         };
         let matchSubMenu = '';
         let defaultSelectedKey = '';
@@ -73,6 +73,16 @@ const SidebarLayoutContainer = React.createClass({
                                 申请
                             </Link>
                         </Menu.Item>
+                        <Menu.Item key={routeBase + 'not_yet_balance'}>
+                            <Link to={routeBase + 'not_yet_balance'}>
+                                未结算订单
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key={routeBase + 'balance_order'}>
+                            <Link to={routeBase + 'balance_order'}>
+                                已结算订单
+                            </Link>
+                        </Menu.Item>
                         <Menu.Item key={routeBase + 'apply_append'}>
                             <Link to={routeBase + 'apply_append'}>
                                 待审核
@@ -91,6 +101,11 @@ const SidebarLayoutContainer = React.createClass({
                         <Menu.Item key={routeBase + 'apply_deny'}>
                             <Link to={routeBase + 'apply_deny'}>
                                 已驳回
+                            </Link>
+                        </Menu.Item>
+                        <Menu.Item key={routeBase + 'template'}>
+                            <Link to={routeBase + 'template'}>
+                                结算用模板
                             </Link>
                         </Menu.Item>
                       </SubMenu>

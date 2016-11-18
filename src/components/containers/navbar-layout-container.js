@@ -7,11 +7,13 @@ import ModifyPassword from '../views/modifyPassword';
 import { passwordModalToggle } from '../../actions/admin-actions';
 import store from '../../store';
 import { logoutUrl, defaultAvatar } from '../../appConstants/urlConfig';
+import { getOrderStatList, getGoodsCategoryList } from '../../api/order-stat-api';
 
 const NavbarLayoutContainer = React.createClass({
     
     componentDidMount : function () {
         getAdmin({});
+        getGoodsCategoryList();
     },
 
     handleClick() {

@@ -16,7 +16,7 @@ const OrderStatContainer = React.createClass({
 
     componentDidMount() {
         getOrderStatList({...this.props.searchState});
-        getGoodsCategoryList();
+        // getGoodsCategoryList();
     },
 
     getInitialState() {

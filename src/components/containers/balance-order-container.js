@@ -1,4 +1,5 @@
 import React from 'react';
+import CashierTemplate from './cashier-template';
 
 const BalanceOrderContainer = React.createClass({
     render() {
