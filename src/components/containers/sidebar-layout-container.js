@@ -103,11 +103,11 @@ const SidebarLayoutContainer = React.createClass({
                                 已驳回
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key={routeBase + 'template'}>
+                        {/*<Menu.Item key={routeBase + 'template'}>
                             <Link to={routeBase + 'template'}>
                                 结算用模板
                             </Link>
-                        </Menu.Item>
+                        </Menu.Item>*/}
                       </SubMenu>
                     </Menu>
 

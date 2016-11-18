@@ -60,13 +60,18 @@ const BalanceOrderContainer = React.createClass({
             title : '结算总价',
             key : 'total',
             dataIndex : 'total'
+        }, {
+            title : '是否结算',
+            render() {
+                return '未结算';
+            }
         }]
     },
     render() {
         const columns = this.getColumns();
         return (
             <div>
-                <CashierTemplate columns={columns} type={type} />
+                <CashierTemplate columns={columns} type={type} textType="未结算金额" />
             </div>
         )
     }

@@ -7,10 +7,21 @@ import { getCashierResult } from '../../api/cashier-api';
 
 const TemplateContainer = React.createClass({
     commonSearch() {
-
+        let config = this.getSearchState();
+        config['page'] = 1;
+        getCashierResult(config, this.getCashierResultSuccess, this.getCashierResultFail);
     },
-    pageSearch() {
-
+    pageSearch(page) {
+        let config = this.getSearchState();
+        config['page'] = page;
+        getCashierResult(config, this.getCashierResultSuccess, this.getCashierResultFail);
+    },
+    updateSearchState(key, value) {
+        this.setState({[key] : value});
+    },
+    getSearchState() {
+        let { search, goods_id, dateStart, dateEnd, page, type} = this.state;
+        return { search, goods_id, dateStart, dateEnd, page, type};
     },
     getInitialState() {
         return {
@@ -24,32 +35,46 @@ const TemplateContainer = React.createClass({
             totalRows : 0, // 总数
             columns : this.props.columns,
             type : this.props.type, // 3已结算 -2未结算 0审核中 1已通过 2已付款 -1已驳回
-            textType : '',
+            textType : this.props.textType,
         }
     },
-    onRangeChange() {
-
+    onSelect(value) {
+        this.setState({goods_id : value}, function () {
+            this.commonSearch();
+        }.bind(this));
+    },
+    onRangeChange(dates, dateStrings) {
+        this.setState({ dateStart : dateStrings[0], dateEnd : dateStrings[1]}, function () {
+            this.commonSearch();
+        }.bind(this));
+    },
+    getCashierResultSuccess(info) {
+       this.setState({
+            dataSource : info.info,
+            page : info.page,
+            totalRows : info.totalRows,
+            textType : this.state.textType || info.type,
+            totalMoney : info.totalMoney
+        });
+    },
+    getCashierResultFail(info) {
+        this.setState({dataSource : [], totalMoney : 0, totalRows : 0});
     },
     componentDidMount() {
-        getCashierResult({type : this.state.type}, function (info) {
-            this.setState({
-                dataSource : info.info,
-                page : info.page,
-                totalRows : info.totalRows,
-                textType : info.type,
-                totalMoney : info.totalMoney
-            })
-        }.bind(this))
+        getCashierResult({type : this.state.type}, this.getCashierResultSuccess);
     },
     componentWillUnmount() {
         this.setState({...this.getInitialState()});
     },
     render() {
-        const selectOptions = this.props.goods.map(function (option) {
+        let selectOptions = this.props.goods.map(function (option) {
             return (
                 <Option key={option.id} value={option.id}>{option.goods_name}</Option>
             )
         });
+        selectOptions.unshift(
+            <Option key={'all'} value={'all'}>所有</Option>
+        );
         const pagination = {
             current : parseInt(this.state.page),
             total : this.state.totalRows,
@@ -65,7 +90,8 @@ const TemplateContainer = React.createClass({
                                 <span className="spanWidth">搜索:</span>
                                 <SearchInput
                                     placeholder="订单编号或社区空店名称"
-                                    updateSearch={this.commonSearch}
+                                    search={this.commonSearch}
+                                    updateSearchState={this.updateSearchState}
                                     style={{width : '284px', marginLeft : '8px', paddingTop : '10px'}} />
                             </Col>
                             <Col>
@@ -76,8 +102,8 @@ const TemplateContainer = React.createClass({
                                 <span className="spanWidth">筛选:</span>
                                 <Select
                                     placeholder="按在售商品种类筛选"
-                                    style={{width : '284px', marginLeft : '8px', paddingTop : '10px'}}
-                                    >
+                                    onSelect={this.onSelect}
+                                    style={{width : '284px', marginLeft : '8px', paddingTop : '10px'}}>
                                     {selectOptions}
                                 </Select>
                             </Col>
@@ -87,7 +113,7 @@ const TemplateContainer = React.createClass({
                         <Row type="flex" align="middle" justify="space-around" style={{height : '114px'}}>
                             <Col style={{textAlign : 'center'}}>
                                 <h3>45</h3>
-                                <p>数量</p>
+                                <p>商品数量</p>
                             </Col>
                             <Col style={{textAlign : 'center'}}>
                                 <h3>{this.state.totalRows}</h3>
@@ -95,7 +121,7 @@ const TemplateContainer = React.createClass({
                             </Col>
                             <Col style={{textAlign : 'center'}}>
                                 <h3>{this.state.totalMoney} <span style={{fontSize : '12px'}}>元</span></h3>
-                                <p>未结算金额</p>
+                                <p>{this.state.textType}</p>
                             </Col>
                         </Row>
                     </Col>

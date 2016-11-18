@@ -18,13 +18,12 @@ const SearchInput = React.createClass({
   },
 
   handleInputChange(e) {
-      // this.props.updateSearch('search')(e.target.value);
       this.setState({value : e.target.value});
+      this.props.updateSearchState('search', e.target.value);
   },
 
   handleSearch() {
-      // store.dispatch(updateOrderStatSearch({ page : 1 }));
-      // this.props.updateSearch('commit')();
+      this.props.search();
   },
 
   render() {

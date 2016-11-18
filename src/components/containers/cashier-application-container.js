@@ -51,7 +51,7 @@ const CashierApplicationContainer = React.createClass({
                     </Row>
                     <Row>
                         <Col style={{textAlign : 'center', paddingBottom : '16px'}}>
-                            <Button onClick={this.routeClick} type="primary">订单列表</Button>
+                            {/*<Button onClick={this.routeClick} type="primary">订单列表</Button>*/}
                         </Col>
                     </Row>
                 </Col>

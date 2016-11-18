@@ -1,6 +1,6 @@
 import React from 'react';
 import CashierTemplate from './cashier-template';
-const type = 3; // 3已结算 -2未结算 0审核中 1已通过 2已付款 -1已驳回
+const type = -1; // 3已结算 -2未结算 0审核中 1已通过 2已付款 -1已驳回
 
 const BalanceOrderContainer = React.createClass({
     getInitialState() {
@@ -63,19 +63,27 @@ const BalanceOrderContainer = React.createClass({
         }, {
             title : '是否结算',
             render() {
-                return '已结算';
+                return '已驳回';
             }
         }, {
             title : '结算时间',
             key : 'account_time',
             dataIndex : 'account_time'
+        }, {
+            title : '驳回理由',
+            key : 'reason',
+            dataIndex : 'reason'
+        }, {
+            title : '处理时间',
+            key : 'respond_time',
+            dataIndex : 'respond_time'
         }]
     },
     render() {
         const columns = this.getColumns();
         return (
             <div>
-                <CashierTemplate columns={columns} type={type} textType="已结算金额" />
+                <CashierTemplate columns={columns} type={type} textType="已驳回金额" />
             </div>
         )
     }
