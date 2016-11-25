@@ -30,9 +30,11 @@ const TemplateContainer = React.createClass({
             dateStart : '',
             dateEnd : '',
             page : 1,
+            limit : 5,
             dataSource : [],
             totalMoney : 0, // 总金额
             totalRows : 0, // 总数
+            totalNumber : 0, // 商品数量
             columns : this.props.columns,
             type : this.props.type, // 3已结算 -2未结算 0审核中 1已通过 2已付款 -1已驳回
             textType : this.props.textType,
@@ -54,11 +56,13 @@ const TemplateContainer = React.createClass({
             page : info.page,
             totalRows : info.totalRows,
             textType : this.state.textType || info.type,
-            totalMoney : info.totalMoney
+            totalMoney : info.totalMoney,
+            totalNumber : info.totalNumber,
+            limit : info.limit || this.state.limit
         });
     },
     getCashierResultFail(info) {
-        this.setState({dataSource : [], totalMoney : 0, totalRows : 0});
+        this.setState({dataSource : [], totalMoney : 0, totalRows : 0, totalNumber : 0});
     },
     componentDidMount() {
         getCashierResult({type : this.state.type}, this.getCashierResultSuccess);
@@ -78,7 +82,8 @@ const TemplateContainer = React.createClass({
         const pagination = {
             current : parseInt(this.state.page),
             total : this.state.totalRows,
-            onChange : this.pageSearch
+            onChange : this.pageSearch,
+            defaultPageSize : this.state.limit
         };
 
         return (
@@ -112,7 +117,7 @@ const TemplateContainer = React.createClass({
                     <Col sm={8}>
                         <Row type="flex" align="middle" justify="space-around" style={{height : '114px'}}>
                             <Col style={{textAlign : 'center'}}>
-                                <h3>45</h3>
+                                <h3>{this.state.totalNumber}</h3>
                                 <p>商品数量</p>
                             </Col>
                             <Col style={{textAlign : 'center'}}>

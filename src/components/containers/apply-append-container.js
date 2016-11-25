@@ -1,6 +1,6 @@
 import React from 'react';
 import CashierTemplate from './cashier-template';
-const type = 0; // 3已结算 -2未结算 0审核中 1已通过 2已付款 -1已驳回
+const type = '0'; // 3已结算 -2未结算 0审核中 1已通过 2已付款 -1已驳回
 
 const BalanceOrderContainer = React.createClass({
     getInitialState() {
