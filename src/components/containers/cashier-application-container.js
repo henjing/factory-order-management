@@ -1,6 +1,6 @@
 import React from 'react';
 import { cashierOverview, cashierSubmitApplication } from '../../api/cashier-api';
-import { Row, Col, Button, Popconfirm, message, Link } from 'antd';
+import { Row, Col, Button, Popconfirm, message } from 'antd';
 import { hashHistory } from 'react-router';
 
 const CashierApplicationContainer = React.createClass({
@@ -33,8 +33,9 @@ const CashierApplicationContainer = React.createClass({
         const cashierButton = this.state.total_price >= 10000 ? (
             <Button className="btn-warning">申请提现</Button>
         ) : (
-            <Button disabled>金额未达到10000元,无法申请提现</Button>
+            <Button className="btn-warning">申请提现</Button>
         );
+        // <Button disabled>金额未达到10000元,无法申请提现</Button>
         return this.props.children || (
             <Row style={{borderBottom : '1px solid #f4f4f5'}}>
                 <Col sm={12}>

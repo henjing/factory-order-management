@@ -36,12 +36,14 @@ const OrderListTableRow = React.createClass({
             let express_sn = dataSource.express_sn;
             store.dispatch(getExpressInfoSuccess({...dataSource}));
             this.props.openSpin();
+            store.dispatch(expressInfoModalToggle());
             getExpressInfo({express_sn : express_sn}, function () {
-                store.dispatch(expressInfoModalToggle());
+                // store.dispatch(expressInfoModalToggle());
                 this.props.closeSpin();
             }.bind(this), function (info) {
-                message.error(info.info);
+                // message.error(info.info);
                 this.props.closeSpin();
+                store.dispatch(getExpressInfoSuccess({info : []}));
             }.bind(this));
         }.bind(this);
     },

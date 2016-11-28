@@ -1,9 +1,9 @@
 import React from 'react';
 import SearchInput from '../views/common-search-input';
-import { Row, Col, DatePicker, Select, Table } from 'antd';
+import { Row, Col, DatePicker, Select, Table, Button, Popconfirm, message } from 'antd';
 import { connect } from 'react-redux';
 const RangePicker = DatePicker.RangePicker;
-import { getCashierResult } from '../../api/cashier-api';
+import { getCashierResult, applyAgain } from '../../api/cashier-api';
 
 const TemplateContainer = React.createClass({
     commonSearch() {
@@ -70,6 +70,14 @@ const TemplateContainer = React.createClass({
     componentWillUnmount() {
         this.setState({...this.getInitialState()});
     },
+    submitCashier() {
+        applyAgain({}, function (info) {
+            message.success(info.info);
+            this.componentDidMount();
+        }.bind(this), function (info) {
+            message.error(info.info);
+        }.bind(this))
+    },
     render() {
         let selectOptions = this.props.goods.map(function (option) {
             return (
@@ -127,6 +135,15 @@ const TemplateContainer = React.createClass({
                             <Col style={{textAlign : 'center'}}>
                                 <h3>{this.state.totalMoney} <span style={{fontSize : '12px'}}>元</span></h3>
                                 <p>{this.state.textType}</p>
+                                {this.state.totalMoney > 0 && this.props.type == -1 ? (
+                                    <div>
+                                        <Popconfirm title="是否重新申请结算" okText="确认" cancelText="取消" onConfirm={this.submitCashier}>
+                                            <Button className="btn-warning">
+                                                重新申请
+                                            </Button>
+                                        </Popconfirm>
+                                    </div>
+                                ) : ''}
                             </Col>
                         </Row>
                     </Col>

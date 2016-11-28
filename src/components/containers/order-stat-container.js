@@ -28,14 +28,16 @@ const OrderStatContainer = React.createClass({
     expressClick(record) {
         return function () {
             this.setState({ isSpin : true });
+            store.dispatch(expressInfoModalToggle());
             let express_sn = record.express_sn;
             store.dispatch(getExpressInfoSuccess({...record}));
             getExpressInfo({express_sn : express_sn}, function () {
                 this.setState({ isSpin : false });
-                store.dispatch(expressInfoModalToggle());
+                // store.dispatch(expressInfoModalToggle());
             }.bind(this), function (info) {
                 this.setState({ isSpin : false });
-                message.error(info.info);
+                // message.error(info.info);
+                store.dispatch(getExpressInfoSuccess({info : []}));
             }.bind(this));
         }.bind(this);
     },

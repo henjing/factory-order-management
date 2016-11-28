@@ -50,3 +50,5 @@ export const getFactoryAccountOverviewUrl = '/Api/index.php/Index/factoryAccount
 export const getFactoryCashierUrl = '/Api/index.php/Index/factoryAccount';
 // 获取提现申请列表(包括结算,付款,审核,驳回)
 export const getFactoryCashierResultUrl = '/Api/index.php/Index/factoryAccountList';
+// 重新申请已驳回的结算单
+export const applyAgainCashierAccountUrl = '/Api/index.php/Index/applyAgain';
