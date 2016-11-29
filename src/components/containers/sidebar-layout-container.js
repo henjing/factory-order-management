@@ -17,7 +17,7 @@ const SidebarLayoutContainer = React.createClass({
     //匹配的导航列表
     matchSubMenu(pathName) {
         const subMenuArray =  {
-            'sub1' : ['/order_list', '/order_stat'],
+            'sub1' : ['/order_list_v2', '/order_stat'],
             'sub2' : ['/cashier', '/not_yet_balance', '/balance_order', '/apply_append', '/pay_append', '/pay_success', '/apply_deny', '/template'],
         };
         let matchSubMenu = '';
@@ -55,8 +55,13 @@ const SidebarLayoutContainer = React.createClass({
                     <Menu mode={mode}
                       defaultSelectedKeys={[matchSubMenu[1]]} defaultOpenKeys={[matchSubMenu[0]]}>
                       <SubMenu key="sub1" title={<span><Icon type="home" /><span className={styles.navText}>厂商管理</span></span>}>
-                        <Menu.Item key={routeBase + 'order_list'}>
+                          {/*<Menu.Item key={routeBase + 'order_list'}>
                             <Link to={routeBase + 'order_list'}>
+                                订单管理
+                            </Link>
+                        </Menu.Item>*/}
+                        <Menu.Item key={routeBase + 'order_list_v2'}>
+                            <Link to={routeBase + 'order_list_v2'}>
                                 订单管理
                             </Link>
                         </Menu.Item>

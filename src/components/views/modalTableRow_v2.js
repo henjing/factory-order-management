@@ -1,7 +1,19 @@
 import React from 'react';
-import { Row, Col, Icon } from 'antd';
+import { Row, Col, Icon, Checkbox } from 'antd';
 
 const ModalTableRow = React.createClass({
+
+    onChange(index) {
+        return function (e) {
+            let dataSource = Object.assign({}, {...this.props.dataSource});
+            if (!e.target.checked) {
+                dataSource['goods_info'][index]['selected'] = 'do not choose this';
+            } else {
+                dataSource['goods_info'][index]['selected'] = 'choose this';
+            }
+            this.props.updateDataSource({...dataSource});
+        }.bind(this);
+    },
     
     render() {
         const { dataSource } = this.props;
@@ -16,9 +28,10 @@ const ModalTableRow = React.createClass({
         while (length > 0) {
             let colSource = dataSource.goods_info[i];
             colList.push(
-                <Col style={{height : '120px', lineHeight : '120px'}}>
+                <Col style={{height : '120px', lineHeight : '120px'}} key={colSource['supplement_id']}>
                     <Row style={{marginLeft : '-15px', marginRight : '-15px'}}>
                         <Col span={14} style={colStyle}>
+                            <Checkbox defaultChecked={true} onChange={this.onChange(i)}>单独发{colSource.goods_name}</Checkbox>
                             <img src={colSource.goods_img} style={{width: '80px', height: '80px', borderRadius : '6px'}} />
                             &nbsp;
                             <span style={{width : '80px', overflow : 'hidden', textOverflow : 'ellipsis', whiteSpace : 'nowrap'}}>

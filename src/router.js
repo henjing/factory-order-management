@@ -3,6 +3,9 @@ import { Router, Route, browserHistory, IndexRedirect, hashHistory } from 'react
 import orderListContainer from './components/containers/order-list-container';
 import orderStatContainer from './components/containers/order-stat-container';
 
+// 发货操作第二版
+import orderListContainerV2 from './components/containers/order-list-container-v2';
+
 // Layouts
 import MainLayout from './components/layouts/main-layout';
 // Route base
@@ -28,8 +31,11 @@ export default (
     <Router history={hashHistory}>
         <Route path={routeBase} component={MainLayout} >
 
-            <IndexRedirect to={routeBase + 'order_list'} />
+            <IndexRedirect to={routeBase + 'order_list_v2'} />
             <Route breadcrumbName="订单管理" path={routeBase + 'order_list'} component={orderListContainer}>
+            </Route>
+
+            <Route breadcrumbName="订单管理v2" path={routeBase + 'order_list_v2'} component={orderListContainerV2}>
             </Route>
             
             <Route breadcrumbName="发货记录" path={routeBase + 'order_stat'} component={orderStatContainer}>

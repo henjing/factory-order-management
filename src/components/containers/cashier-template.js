@@ -65,7 +65,7 @@ const TemplateContainer = React.createClass({
         this.setState({dataSource : [], totalMoney : 0, totalRows : 0, totalNumber : 0});
     },
     componentDidMount() {
-        getCashierResult({type : this.state.type}, this.getCashierResultSuccess);
+        getCashierResult({type : this.state.type}, this.getCashierResultSuccess, this.getCashierResultFail);
     },
     componentWillUnmount() {
         this.setState({...this.getInitialState()});
@@ -76,6 +76,7 @@ const TemplateContainer = React.createClass({
             this.componentDidMount();
         }.bind(this), function (info) {
             message.error(info.info);
+            this.componentDidMount();
         }.bind(this))
     },
     render() {

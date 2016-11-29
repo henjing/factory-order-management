@@ -35,7 +35,7 @@ const SearchInput = React.createClass({
 
   handleSearch() {
       store.dispatch(updateOrderListSearch({ page : 1 }));
-      this.props.updateSearch('commmit')();
+      this.props.updateSearch('commit')();
   },
 
   render() {

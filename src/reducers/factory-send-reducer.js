@@ -8,7 +8,6 @@ const initialState = {
     express_sn : '',
     express_fee : '',
     selectedAll : false,
-    
 };
 
 const factorySendReducer = function (state = initialState, action) {
@@ -18,7 +17,7 @@ const factorySendReducer = function (state = initialState, action) {
         case types.FACTORY_MODAL_TOGGLE :
             return Object.assign({}, state, { visible : !state.visible});
         
-        case types.FACTORY_SEND_SELECTED : 
+        case types.FACTORY_SEND_SELECTED :
             return Object.assign({}, state, {...action.info});
     }
     
