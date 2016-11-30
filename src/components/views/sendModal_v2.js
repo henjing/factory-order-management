@@ -122,7 +122,7 @@ let SendModal = React.createClass({
         let rowList = [];
         for (let i = 0; i < info.length; i++) {
             rowList.push(
-                <ModalTableRow key={info[i]['record_sn']} updateDataSource={this.updateDataSource(i)} dataSource={info[i]} />
+                <ModalTableRow key={i} updateDataSource={this.updateDataSource(i)} dataSource={info[i]} />
             )
         }
 

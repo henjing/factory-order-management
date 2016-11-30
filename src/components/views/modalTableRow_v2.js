@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Icon, Checkbox } from 'antd';
+import AtomCheckbox from '../views/atom-checkbox';
 
 const ModalTableRow = React.createClass({
 
@@ -31,7 +32,8 @@ const ModalTableRow = React.createClass({
                 <Col style={{height : '120px', lineHeight : '120px'}} key={colSource['supplement_id']}>
                     <Row style={{marginLeft : '-15px', marginRight : '-15px'}}>
                         <Col span={14} style={colStyle}>
-                            <Checkbox defaultChecked={true} onChange={this.onChange(i)}>单独发{colSource.goods_name}</Checkbox>
+                            {/*<Checkbox defaultChecked={true} onChange={this.onChange(i)}>单独发{colSource.goods_name}</Checkbox>*/}
+                            <AtomCheckbox goods_name={colSource.goods_name} onChange={this.onChange(i)} />
                             <img src={colSource.goods_img} style={{width: '80px', height: '80px', borderRadius : '6px'}} />
                             &nbsp;
                             <span style={{width : '80px', overflow : 'hidden', textOverflow : 'ellipsis', whiteSpace : 'nowrap'}}>
